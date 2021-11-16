@@ -46,5 +46,11 @@ public interface Dungeon {
    */
   Location getEnd();
 
+  /**
+   *
+   * @param distance
+   * @param node
+   * @return
+   */
   List<Integer> findAdjacentSpeDis(int distance, int node);
 }

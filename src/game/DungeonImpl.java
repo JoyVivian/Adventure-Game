@@ -94,6 +94,8 @@ public class DungeonImpl implements Dungeon {
 
     RandomFactory randomFactory = new RandomFactory();
 
+    //TODO: To change this code in randomly assign treasures.
+    //Add treasures to caves.
     //Find the exact number of caves that should be assigned treasures.
     int numCaves = (int) Math.ceil(treasurePercentage / 100.0 * caveNum);
     int j = 1;
@@ -113,6 +115,9 @@ public class DungeonImpl implements Dungeon {
       locationImpl.assignTreasure(treasure);
       j++;
     }
+
+    //Assign arrows.
+    assignArrows(treasurePer);
 
     RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 1, vertexNum);
     this.start = randomValueIns.getRandomValue();
@@ -204,6 +209,33 @@ public class DungeonImpl implements Dungeon {
 
       randomCave.assignOtyugh();
       otyNum--;
+    }
+  }
+
+  /**
+   * Assign one or two arrows randomly to specific locations.
+   * @param arrowPer An integer represents have many percentage of locations
+   *                 should be assigned arrows.
+   */
+  private void assignArrows(int arrowPer) {
+    int numLocs = (int) Math.ceil(arrowPer / 100.0 * this.graph.getVnum());
+
+    for (int i = numLocs; i > 0; i--) {
+      RandomFactory randomFactory = new RandomFactory();
+      RandomValue randomValueIns = randomFactory.createRandomInstance(true, 1,
+              this.graph.getVnum());
+      int randomValue = randomValueIns.getRandomValue();
+
+      Location randomLoc = this.graph.getLocation(randomValue);
+
+      //Generate a random number one or two which represents the number of arrows
+      //that should be assigned to this cave.
+      randomValueIns = randomFactory.createRandomInstance(true, 1, 2);
+      randomValue = randomValueIns.getRandomValue();
+      while (randomValue > 0) {
+        randomLoc.assignArrow();
+        randomValue--;
+      }
     }
   }
 
@@ -362,14 +394,14 @@ public class DungeonImpl implements Dungeon {
 
   @Override
   public String printDungeon() {
-    String treasureInfo = "";
+    String locationInfo = "";
     for (int i = 1; i <= this.graph.getVnum(); i++) {
-      treasureInfo += this.graph.getLocation(i).toString() + "\n";
+      locationInfo += this.graph.getLocation(i).toString() + "\n";
     }
 
     String dungeonInfo = "The graph is: " + this.graph.toString() +
             "\n" +
-            "The treasure allocation is: \n" + treasureInfo;
+            "The information on this location is: \n" + locationInfo;
     return dungeonInfo;
   }
 }

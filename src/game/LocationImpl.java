@@ -16,6 +16,7 @@ public class LocationImpl implements Location {
   private boolean isCave;
   private List<Treasure> treasureList;
   private List<Otyugh> otyughList;
+  private int arrowNum;
 
   /**
    * The constructor of the Location class that takes in two argument.
@@ -30,8 +31,9 @@ public class LocationImpl implements Location {
 
     this.row = x;
     this.col = y;
-    treasureList = new ArrayList<>();
-    otyughList = new ArrayList<>();
+    this.treasureList = new ArrayList<>();
+    this.otyughList = new ArrayList<>();
+    this.arrowNum = 0;
   }
 
   @Override
@@ -47,6 +49,11 @@ public class LocationImpl implements Location {
   public void assignOtyugh() {
     Otyugh otyugh = new Otyugh();
     otyughList.add(otyugh);
+  }
+
+  @Override
+  public void assignArrow() {
+    this.arrowNum++;
   }
 
   @Override
@@ -88,6 +95,11 @@ public class LocationImpl implements Location {
   }
 
   @Override
+  public int getArrows() {
+    return this.arrowNum;
+  }
+
+  @Override
   public String toString() {
     return "Location{" +
             "col=" + col +
@@ -95,6 +107,7 @@ public class LocationImpl implements Location {
             ", isCave=" + isCave +
             ", treasureList=" + treasureList +
             ", otyughList=" + otyughList +
+            ", arrowNum=" + arrowNum +
             '}' + "\n";
   }
 

@@ -21,6 +21,11 @@ public interface Location {
   void assignOtyugh();
 
   /**
+   * Assign one arrow to the Dungeon.
+   */
+  void assignArrow();
+
+  /**
    * Set if this location is a cave.
    *
    * @param isCave A boolean that represents whether this location is a cave.
@@ -69,4 +74,11 @@ public interface Location {
    * @return The list of treasures that store in the location.
    */
   List<Otyugh> getOtyughs();
+
+  /**
+   * Get the number of arrows in this location.
+   *
+   * @return An integer represents the number of the arrows in the location.
+   */
+  int getArrows();
 }

@@ -90,4 +90,31 @@ public class LocationTest {
 
     assertEquals(treasureList, location.getTreasureList());
   }
+
+  @Test
+  public void assignOtyugh() {
+    location.assignOtyugh();
+    List<Otyugh> expected = new ArrayList<>();
+
+    Otyugh otyugh1 = new Otyugh();
+    expected.add(otyugh1);
+
+    assertEquals(expected, location.getOtyughs());
+
+    location.assignOtyugh();
+
+    Otyugh otyugh2 = new Otyugh();
+    expected.add(otyugh2);
+    assertEquals(expected, location.getOtyughs());
+  }
+
+  @Test
+  public void assignArrow() {
+    assertEquals(0, location.getArrows());
+
+    location.assignArrow();
+    location.assignArrow();
+
+    assertEquals(2, location.getArrows());
+  }
 }
