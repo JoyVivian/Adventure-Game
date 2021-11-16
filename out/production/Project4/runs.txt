@@ -1,0 +1,1086 @@
+/Users/weizhang/Library/Java/JavaVirtualMachines/openjdk-16.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=56314:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/weizhang/IdeaProjects/Project3/out/production/Project3 Driver 5 5 0 true 20
+Please input the rowNum, colNum, Interconnectivity, isWrap, percentage of treasure.Be sure to enter both rowNum and colNum greater than 5.
+shortest pathLen is: 4
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=3, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=1, row=1, isCave=true, treasureList=[DIAMOND]}
+
+
+end location is: Location{col=4, row=1, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=4, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=1, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=3, isCave=true, treasureList=[]}
+
+
+The graph is: GraphImpl{vertexNum=25, edgeNum=34}
+adjacentList={1=[6, 5, 21], 2=[7, 22], 3=[8, 4, 23], 4=[3, 24], 5=[10, 1, 25], 6=[7, 1, 11, 10], 7=[2, 8, 6, 12], 8=[7, 13, 3], 9=[10], 10=[5, 9, 15, 6], 11=[6, 15], 12=[17, 7], 13=[8, 14], 14=[13], 15=[10, 20, 11], 16=[17, 21, 20], 17=[12, 18, 16, 22], 18=[17, 23], 19=[20], 20=[15, 19, 25, 16], 21=[16, 25, 1], 22=[17, 2], 23=[18, 24, 3], 24=[23, 25, 4], 25=[20, 24, 21, 5]}}
+The treasure allocation is: 
+Location{col=1, row=1, isCave=true, treasureList=[DIAMOND]}
+
+Location{col=2, row=1, isCave=false, treasureList=[]}
+
+Location{col=3, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+Location{col=4, row=1, isCave=false, treasureList=[]}
+
+Location{col=5, row=1, isCave=true, treasureList=[RUBIE]}
+
+Location{col=1, row=2, isCave=true, treasureList=[RUBIE]}
+
+Location{col=2, row=2, isCave=true, treasureList=[]}
+
+Location{col=3, row=2, isCave=true, treasureList=[]}
+
+Location{col=4, row=2, isCave=true, treasureList=[]}
+
+Location{col=5, row=2, isCave=true, treasureList=[]}
+
+Location{col=1, row=3, isCave=false, treasureList=[]}
+
+Location{col=2, row=3, isCave=false, treasureList=[]}
+
+Location{col=3, row=3, isCave=false, treasureList=[]}
+
+Location{col=4, row=3, isCave=true, treasureList=[]}
+
+Location{col=5, row=3, isCave=true, treasureList=[]}
+
+Location{col=1, row=4, isCave=true, treasureList=[]}
+
+Location{col=2, row=4, isCave=true, treasureList=[]}
+
+Location{col=3, row=4, isCave=false, treasureList=[]}
+
+Location{col=4, row=4, isCave=true, treasureList=[]}
+
+Location{col=5, row=4, isCave=true, treasureList=[]}
+
+Location{col=1, row=5, isCave=true, treasureList=[]}
+
+Location{col=2, row=5, isCave=false, treasureList=[]}
+
+Location{col=3, row=5, isCave=true, treasureList=[]}
+
+Location{col=4, row=5, isCave=true, treasureList=[]}
+
+Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+The player stand at the start and doesn't pick anything.
+
+The start node of the dungeon is: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+
+The end node of the dungeon is: Location{col=4, row=3, isCave=true, treasureList=[]}
+
+
+Location info to the end: 
+
+The player can move to: North, West, South, East, 
+The current location info: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+The player can move to: South, East, North, 
+The current location info: Location{col=5, row=1, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: South, West, North, 
+The current location info: Location{col=1, row=1, isCave=true, treasureList=[DIAMOND]}
+
+The player can move to: East, North, South, West, 
+The current location info: Location{col=1, row=2, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: North, East, West, South, 
+The current location info: Location{col=2, row=2, isCave=true, treasureList=[]}
+
+The player can move to: South, North, 
+The current location info: Location{col=2, row=1, isCave=false, treasureList=[]}
+
+The player can move to: North, South, 
+The current location info: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+The player can move to: North, East, West, South, 
+The current location info: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+The player can move to: West, South, 
+The current location info: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+The player can move to: North, East, South, 
+The current location info: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+The player can move to: West, East, South, 
+The current location info: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+The player can move to: West, North, 
+The current location info: Location{col=4, row=1, isCave=false, treasureList=[]}
+
+The player can move to: South, East, North, 
+The current location info: Location{col=3, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+The player can move to: West, South, North, 
+The current location info: Location{col=3, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, East, 
+The current location info: Location{col=3, row=3, isCave=false, treasureList=[]}
+
+The player can move to: West, 
+The current location info: Location{col=4, row=3, isCave=true, treasureList=[]}
+
+The player comes to the end and picked everything on the road. There is what he picks: 
+
+RUBIE	DIAMOND	RUBIE	SAPPHIRE	
+
+Process finished with exit code 0
+
+--------------------------------------------------------------------------
+
+/Users/weizhang/Library/Java/JavaVirtualMachines/openjdk-16.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=56325:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/weizhang/IdeaProjects/Project3/out/production/Project3 Driver 5 5 2 true 20
+Please input the rowNum, colNum, Interconnectivity, isWrap, percentage of treasure.Be sure to enter both rowNum and colNum greater than 5.
+shortest pathLen is: 1
+
+start location is: Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+
+end location is: Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=4, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=2, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=5, row=1, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=4, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=4, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=4, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=4, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+
+shortest pathLen is: 0
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 0
+
+start location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+
+end location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=2, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=5, row=1, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=5, row=4, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=2, row=5, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=5, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 0
+
+start location is: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=5, row=1, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 0
+
+start location is: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 4
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=5, row=4, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+
+end location is: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 2
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=4, row=3, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+
+The graph is: GraphImpl{vertexNum=25, edgeNum=36}
+adjacentList={1=[6, 2, 5, 21], 2=[3, 1, 7, 22], 3=[4, 2, 23], 4=[5, 3, 9, 24], 5=[4, 10, 1, 25], 6=[1, 7, 11, 10], 7=[8, 6, 2], 8=[13, 7], 9=[4], 10=[15, 5, 6], 11=[6, 15], 12=[17, 13], 13=[8, 14, 12], 14=[15, 13], 15=[10, 14, 20, 11], 16=[17, 21, 20], 17=[12, 18, 16, 22], 18=[17, 23], 19=[24], 20=[15, 16], 21=[16, 25, 1], 22=[17, 2], 23=[24, 18, 3], 24=[19, 25, 23, 4], 25=[24, 21, 5]}}
+The treasure allocation is: 
+Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+Location{col=5, row=1, isCave=true, treasureList=[]}
+
+Location{col=1, row=2, isCave=true, treasureList=[]}
+
+Location{col=2, row=2, isCave=true, treasureList=[]}
+
+Location{col=3, row=2, isCave=false, treasureList=[]}
+
+Location{col=4, row=2, isCave=true, treasureList=[]}
+
+Location{col=5, row=2, isCave=true, treasureList=[]}
+
+Location{col=1, row=3, isCave=false, treasureList=[]}
+
+Location{col=2, row=3, isCave=false, treasureList=[]}
+
+Location{col=3, row=3, isCave=true, treasureList=[]}
+
+Location{col=4, row=3, isCave=false, treasureList=[]}
+
+Location{col=5, row=3, isCave=true, treasureList=[]}
+
+Location{col=1, row=4, isCave=true, treasureList=[]}
+
+Location{col=2, row=4, isCave=true, treasureList=[]}
+
+Location{col=3, row=4, isCave=false, treasureList=[]}
+
+Location{col=4, row=4, isCave=true, treasureList=[]}
+
+Location{col=5, row=4, isCave=false, treasureList=[]}
+
+Location{col=1, row=5, isCave=true, treasureList=[]}
+
+Location{col=2, row=5, isCave=false, treasureList=[]}
+
+Location{col=3, row=5, isCave=true, treasureList=[]}
+
+Location{col=4, row=5, isCave=true, treasureList=[]}
+
+Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+The player stand at the start and doesn't pick anything.
+
+The start node of the dungeon is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+The end node of the dungeon is: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+
+Location info to the end: 
+
+The player can move to: North, West, South, East, 
+The current location info: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+The player can move to: South, North, East, 
+The current location info: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+The player can move to: West, South, East, North, 
+The current location info: Location{col=5, row=1, isCave=true, treasureList=[]}
+
+The player can move to: East, West, South, North, 
+The current location info: Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+The player can move to: East, West, North, 
+The current location info: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: East, West, South, North, 
+The current location info: Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+The player can move to: South, East, West, North, 
+The current location info: Location{col=1, row=1, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: North, East, South, West, 
+The current location info: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+The player can move to: East, West, North, 
+The current location info: Location{col=2, row=2, isCave=true, treasureList=[]}
+
+The player can move to: South, West, 
+The current location info: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+The player can move to: North, East, West, 
+The current location info: Location{col=3, row=3, isCave=true, treasureList=[]}
+
+The player comes to the end and picked everything on the road. There is what he picks: 
+
+SAPPHIRE	RUBIE	DIAMOND	RUBIE	
+
+Process finished with exit code 0
+--------------------------------------------------------------------------
+/Users/weizhang/Library/Java/JavaVirtualMachines/openjdk-16.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=56329:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/weizhang/IdeaProjects/Project3/out/production/Project3 Driver 5 5 0 false 20
+Please input the rowNum, colNum, Interconnectivity, isWrap, percentage of treasure.Be sure to enter both rowNum and colNum greater than 5.
+shortest pathLen is: 0
+
+start location is: Location{col=2, row=3, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=4, row=1, isCave=false, treasureList=[]}
+
+
+shortest pathLen is: 11
+
+start location is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+
+The graph is: GraphImpl{vertexNum=25, edgeNum=24}
+adjacentList={1=[6], 2=[7], 3=[4], 4=[5, 3], 5=[10, 4], 6=[1, 7], 7=[12, 6, 2, 8], 8=[7], 9=[10], 10=[5, 9, 15], 11=[16, 12], 12=[7, 13, 11], 13=[12], 14=[15], 15=[10, 14, 20], 16=[11, 17, 21], 17=[16, 18, 22], 18=[17, 19], 19=[24, 18], 20=[25, 15], 21=[16], 22=[17], 23=[24], 24=[19, 25, 23], 25=[24, 20]}}
+The treasure allocation is: 
+Location{col=1, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+Location{col=2, row=1, isCave=true, treasureList=[DIAMOND]}
+
+Location{col=3, row=1, isCave=true, treasureList=[DIAMOND]}
+
+Location{col=4, row=1, isCave=false, treasureList=[]}
+
+Location{col=5, row=1, isCave=false, treasureList=[]}
+
+Location{col=1, row=2, isCave=false, treasureList=[]}
+
+Location{col=2, row=2, isCave=true, treasureList=[SAPPHIRE]}
+
+Location{col=3, row=2, isCave=true, treasureList=[]}
+
+Location{col=4, row=2, isCave=true, treasureList=[]}
+
+Location{col=5, row=2, isCave=true, treasureList=[]}
+
+Location{col=1, row=3, isCave=false, treasureList=[]}
+
+Location{col=2, row=3, isCave=true, treasureList=[]}
+
+Location{col=3, row=3, isCave=true, treasureList=[]}
+
+Location{col=4, row=3, isCave=true, treasureList=[]}
+
+Location{col=5, row=3, isCave=true, treasureList=[]}
+
+Location{col=1, row=4, isCave=true, treasureList=[]}
+
+Location{col=2, row=4, isCave=true, treasureList=[]}
+
+Location{col=3, row=4, isCave=false, treasureList=[]}
+
+Location{col=4, row=4, isCave=false, treasureList=[]}
+
+Location{col=5, row=4, isCave=false, treasureList=[]}
+
+Location{col=1, row=5, isCave=true, treasureList=[]}
+
+Location{col=2, row=5, isCave=true, treasureList=[]}
+
+Location{col=3, row=5, isCave=true, treasureList=[]}
+
+Location{col=4, row=5, isCave=true, treasureList=[]}
+
+Location{col=5, row=5, isCave=false, treasureList=[]}
+
+
+The player stand at the start and doesn't pick anything.
+
+The start node of the dungeon is: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+
+The end node of the dungeon is: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+
+Location info to the end: 
+
+The player can move to: East, 
+The current location info: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, West, South, 
+The current location info: Location{col=5, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, West, South, 
+The current location info: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+The player can move to: South, North, 
+The current location info: Location{col=5, row=4, isCave=false, treasureList=[]}
+
+The player can move to: West, North, 
+The current location info: Location{col=5, row=5, isCave=false, treasureList=[]}
+
+The player can move to: North, East, West, 
+The current location info: Location{col=4, row=5, isCave=true, treasureList=[]}
+
+The player can move to: South, West, 
+The current location info: Location{col=4, row=4, isCave=false, treasureList=[]}
+
+The player can move to: West, East, 
+The current location info: Location{col=3, row=4, isCave=false, treasureList=[]}
+
+The player can move to: West, East, South, 
+The current location info: Location{col=2, row=4, isCave=true, treasureList=[]}
+
+The player can move to: North, East, South, 
+The current location info: Location{col=1, row=4, isCave=true, treasureList=[]}
+
+The player can move to: North, 
+The current location info: Location{col=1, row=5, isCave=true, treasureList=[]}
+
+The player comes to the end and picked everything on the road. There is what he picks: 
+
+
+
+Process finished with exit code 0
+------------------------------------------------------------------------
+/Users/weizhang/Library/Java/JavaVirtualMachines/openjdk-16.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=56332:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/weizhang/IdeaProjects/Project3/out/production/Project3 Driver 5 5 2 false 20
+Please input the rowNum, colNum, Interconnectivity, isWrap, percentage of treasure.Be sure to enter both rowNum and colNum greater than 5.
+shortest pathLen is: 1
+
+start location is: Location{col=1, row=1, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 12
+
+start location is: Location{col=1, row=1, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=2, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 5
+
+start location is: Location{col=1, row=5, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 3
+
+start location is: Location{col=1, row=1, isCave=false, treasureList=[]}
+
+
+end location is: Location{col=5, row=3, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 1
+
+start location is: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+
+end location is: Location{col=3, row=5, isCave=true, treasureList=[]}
+
+
+shortest pathLen is: 12
+
+start location is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+end location is: Location{col=2, row=5, isCave=true, treasureList=[]}
+
+
+The graph is: GraphImpl{vertexNum=25, edgeNum=26}
+adjacentList={1=[6, 2], 2=[3, 7, 1], 3=[4, 2, 8], 4=[3, 5, 9], 5=[4], 6=[1, 7, 11], 7=[6, 2, 12], 8=[3, 9], 9=[14, 8, 4], 10=[15], 11=[6, 16], 12=[7, 17], 13=[14, 18], 14=[9, 15, 13, 19], 15=[14, 10, 20], 16=[21, 11], 17=[12], 18=[13, 23], 19=[14, 24], 20=[15], 21=[16, 22], 22=[21], 23=[18], 24=[19, 25], 25=[24]}}
+The treasure allocation is: 
+Location{col=1, row=1, isCave=false, treasureList=[]}
+
+Location{col=2, row=1, isCave=true, treasureList=[RUBIE]}
+
+Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+Location{col=4, row=1, isCave=true, treasureList=[SAPPHIRE]}
+
+Location{col=5, row=1, isCave=true, treasureList=[]}
+
+Location{col=1, row=2, isCave=true, treasureList=[]}
+
+Location{col=2, row=2, isCave=true, treasureList=[]}
+
+Location{col=3, row=2, isCave=false, treasureList=[]}
+
+Location{col=4, row=2, isCave=true, treasureList=[]}
+
+Location{col=5, row=2, isCave=true, treasureList=[]}
+
+Location{col=1, row=3, isCave=false, treasureList=[]}
+
+Location{col=2, row=3, isCave=false, treasureList=[]}
+
+Location{col=3, row=3, isCave=false, treasureList=[]}
+
+Location{col=4, row=3, isCave=true, treasureList=[]}
+
+Location{col=5, row=3, isCave=true, treasureList=[]}
+
+Location{col=1, row=4, isCave=false, treasureList=[]}
+
+Location{col=2, row=4, isCave=true, treasureList=[]}
+
+Location{col=3, row=4, isCave=false, treasureList=[]}
+
+Location{col=4, row=4, isCave=false, treasureList=[]}
+
+Location{col=5, row=4, isCave=true, treasureList=[]}
+
+Location{col=1, row=5, isCave=false, treasureList=[]}
+
+Location{col=2, row=5, isCave=true, treasureList=[]}
+
+Location{col=3, row=5, isCave=true, treasureList=[]}
+
+Location{col=4, row=5, isCave=false, treasureList=[]}
+
+Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+The player stand at the start and doesn't pick anything.
+
+The start node of the dungeon is: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+
+The end node of the dungeon is: Location{col=2, row=5, isCave=true, treasureList=[]}
+
+
+Location info to the end: 
+
+The player can move to: West, 
+The current location info: Location{col=5, row=5, isCave=true, treasureList=[]}
+
+The player can move to: North, East, 
+The current location info: Location{col=4, row=5, isCave=false, treasureList=[]}
+
+The player can move to: North, South, 
+The current location info: Location{col=4, row=4, isCave=false, treasureList=[]}
+
+The player can move to: North, East, West, South, 
+The current location info: Location{col=4, row=3, isCave=true, treasureList=[]}
+
+The player can move to: South, West, North, 
+The current location info: Location{col=4, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, East, 
+The current location info: Location{col=3, row=2, isCave=false, treasureList=[]}
+
+The player can move to: East, West, South, 
+The current location info: Location{col=3, row=1, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: East, South, West, 
+The current location info: Location{col=2, row=1, isCave=true, treasureList=[RUBIE]}
+
+The player can move to: West, North, South, 
+The current location info: Location{col=2, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, East, South, 
+The current location info: Location{col=1, row=2, isCave=true, treasureList=[]}
+
+The player can move to: North, South, 
+The current location info: Location{col=1, row=3, isCave=false, treasureList=[]}
+
+The player can move to: South, North, 
+The current location info: Location{col=1, row=4, isCave=false, treasureList=[]}
+
+The player can move to: North, East, 
+The current location info: Location{col=1, row=5, isCave=false, treasureList=[]}
+
+The player can move to: West, 
+The current location info: Location{col=2, row=5, isCave=true, treasureList=[]}
+
+The player comes to the end and picked everything on the road. There is what he picks: 
+
+RUBIE	RUBIE	
+
+Process finished with exit code 0
+
