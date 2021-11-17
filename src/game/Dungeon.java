@@ -47,10 +47,10 @@ public interface Dungeon {
   Location getEnd();
 
   /**
+   * Find what type of smell that can be detect from the current location.
    *
-   * @param distance
-   * @param node
-   * @return
+   * @param curLoc The current location of the player.
+   * @return A Danger Enum that represents the type of danger.
    */
-  List<Integer> findAdjacentSpeDis(int distance, int node);
+  Danger findSmell(Location curLoc);
 }

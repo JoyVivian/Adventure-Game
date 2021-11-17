@@ -54,7 +54,7 @@ public interface Graph {
    * @param v The node that should get the adjacent nodes.
    * @return A list contains the adjacent locations of the specific node.
    */
-  List<LocationImpl> getAdjacentLocations(Location v);
+  List<Location> getAdjacentLocations(Location v);
 
   /**
    * Get how many other nodes are connected to this node.

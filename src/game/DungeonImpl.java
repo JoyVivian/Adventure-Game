@@ -94,7 +94,6 @@ public class DungeonImpl implements Dungeon {
 
     RandomFactory randomFactory = new RandomFactory();
 
-    //TODO: To change this code in randomly assign treasures.
     //Add treasures to caves.
     //Find the exact number of caves that should be assigned treasures.
     int numCaves = (int) Math.ceil(treasurePercentage / 100.0 * caveNum);
@@ -117,7 +116,7 @@ public class DungeonImpl implements Dungeon {
     }
 
     //Assign arrows.
-    assignArrows(treasurePer);
+    assignArrows(treasurePer, isRandom);
 
     RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 1, vertexNum);
     this.start = randomValueIns.getRandomValue();
@@ -163,20 +162,22 @@ public class DungeonImpl implements Dungeon {
     }
 
     //Add Otyughs to the Dungeon.
-    addOtyughs(otyNum, true, startLoc, endLoc);
+    addOtyughs(otyNum, isRandom);
 
   }
 
   //TODO: Add some code for test purpose.
+
   /**
    * To assign monsters randomly to the dungeon.
    *
    * @param otyNum   The number of Otyugh that should be assigned to the Dungeon.
    * @param isRandom To specify whether this code is for testing.
-   * @param start    The start location of the Dungeon.
-   * @param end      The end location of the Dungeon.
    */
-  private void addOtyughs(int otyNum, boolean isRandom, Location start, Location end) {
+  private void addOtyughs(int otyNum, boolean isRandom) {
+    Location startLoc = this.graph.getLocation(this.start);
+    Location endLoc = this.graph.getLocation(this.end);
+
     //Get all the caves of the Dungeon.
     List<Location> caveList = new ArrayList<>();
     for (int i = 1; i <= this.graph.getVnum(); i++) {
@@ -190,51 +191,96 @@ public class DungeonImpl implements Dungeon {
 
     while (otyNum > 0) {
       //According to the requirement, the end position must have an Otyugh.
-      end.assignOtyugh();
+      endLoc.assignOtyugh();
       otyNum--;
+      if (otyNum <= 0) {
+        break;
+      }
 
       //Assign the remain Otyughs randomly.
       RandomFactory randomFactory = new RandomFactory();
-      RandomValue randomValueIns = randomFactory.createRandomInstance(true, 0, caveList.size() - 1);
+      RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 0, caveList.size() - 1);
       int randomValue = randomValueIns.getRandomValue();
 
       Location randomCave = caveList.get(randomValue);
 
-      //The start position can not hold Octyughs.
-      while (randomCave.equals(start)) {
-        randomValue = randomValueIns.getRandomValue();
+      if (isRandom) {
+        //The start position can not hold Octyughs.
+        while (randomCave.equals(startLoc)) {
+          randomValue = randomValueIns.getRandomValue();
 
-        randomCave = caveList.get(randomValue);
+          randomCave = caveList.get(randomValue);
+        }
+
+        randomCave.assignOtyugh();
+        otyNum--;
+      } else {
+        endLoc.assignOtyugh();
+        otyNum--;
+        if (otyNum <= 0) {
+          break;
+        }
+
+        for (int i = randomValue; i < caveList.size(); i++) {
+          randomCave = caveList.get(i);
+
+          if (randomCave.equals(startLoc) || randomCave.equals(endLoc)) {
+            continue;
+          } else {
+            randomCave.assignOtyugh();
+            otyNum--;
+            if (otyNum <= 0) {
+              break;
+            }
+          }
+        }
       }
-
-      randomCave.assignOtyugh();
-      otyNum--;
     }
   }
 
   /**
    * Assign one or two arrows randomly to specific locations.
+   *
    * @param arrowPer An integer represents have many percentage of locations
    *                 should be assigned arrows.
    */
-  private void assignArrows(int arrowPer) {
+  private void assignArrows(int arrowPer, boolean isRandom) {
     int numLocs = (int) Math.ceil(arrowPer / 100.0 * this.graph.getVnum());
 
+    List<Location> visitedLocs = new ArrayList<>();
+    int curId = 1;
     for (int i = numLocs; i > 0; i--) {
       RandomFactory randomFactory = new RandomFactory();
-      RandomValue randomValueIns = randomFactory.createRandomInstance(true, 1,
+      RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 1,
               this.graph.getVnum());
       int randomValue = randomValueIns.getRandomValue();
 
       Location randomLoc = this.graph.getLocation(randomValue);
 
-      //Generate a random number one or two which represents the number of arrows
-      //that should be assigned to this cave.
-      randomValueIns = randomFactory.createRandomInstance(true, 1, 2);
-      randomValue = randomValueIns.getRandomValue();
-      while (randomValue > 0) {
-        randomLoc.assignArrow();
-        randomValue--;
+      if (isRandom) {
+        while (visitedLocs.contains(randomLoc)) {
+          randomValue = randomValueIns.getRandomValue();
+          randomLoc = this.graph.getLocation(randomValue);
+        }
+
+        visitedLocs.add(randomLoc);
+
+        //Generate a random number one or two which represents the number of arrows
+        //that should be assigned to this cave.
+        randomValueIns = randomFactory.createRandomInstance(isRandom, 1, 2);
+        randomValue = randomValueIns.getRandomValue();
+        while (randomValue > 0) {
+          randomLoc.assignArrow();
+          randomValue--;
+        }
+      } else {
+        if (curId > this.graph.getVnum()) {
+          curId = 1;
+        } else {
+          Location location = this.graph.getLocation(curId);
+          location.assignArrow();
+        }
+        curId++;
       }
     }
   }
@@ -344,9 +390,8 @@ public class DungeonImpl implements Dungeon {
     return this.graph.getLocation(this.end);
   }
 
-  @Override
-  public List<Integer> findAdjacentSpeDis(int distance, int node) {
-    List<java.lang.Integer> result = new ArrayList<>();
+  private List<Integer> findAdjacentSpeDis(int distance, int node) {
+    List<Integer> result = new ArrayList<>();
     dfs(distance, node, -1, result);
     return result;
   }
@@ -364,6 +409,52 @@ public class DungeonImpl implements Dungeon {
         dfs(distance - 1, i, node, findNodes);
       }
     }
+  }
+
+  @Override
+  public Danger findSmell(Location curLoc) {
+    Danger danger = Danger.LESSSMELL;
+    int curLocId = curLoc.getId(this.colNum);
+    List<Integer> adjLocs = this.findAdjacentSpeDis(1, curLocId);
+    for (int adjLoc : adjLocs) {
+      Location location = this.graph.getLocation(adjLoc);
+      List<Otyugh> otyughs = location.getOtyughs();
+      int otyughNum = 0;
+      for (Otyugh otyugh : otyughs) {
+        if (otyugh.getHealth() == 0) {
+          continue;
+        } else {
+          otyughNum++;
+        }
+      }
+
+      if (otyughNum > 0) {
+        return Danger.MORESMELL;
+      }
+    }
+
+    adjLocs = this.findAdjacentSpeDis(2, curLocId);
+    for (int adjLoc : adjLocs) {
+      Location location = this.graph.getLocation(adjLoc);
+      List<Otyugh> otyughs = location.getOtyughs();
+      int otyughNum = 0;
+      for (Otyugh otyugh : otyughs) {
+        if (otyugh.getHealth() == 0) {
+          continue;
+        } else {
+          otyughNum++;
+        }
+      }
+      if (otyughNum > 1) {
+        return Danger.MORESMELL;
+      } else if (otyughNum == 1) {
+        return Danger.LESSSMELL;
+      } else {
+        return Danger.NODANGER;
+      }
+    }
+
+    return Danger.NODANGER;
   }
 
   @Override

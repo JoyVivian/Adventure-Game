@@ -108,8 +108,8 @@ public class Driver {
     //current location info.
     Graph graph = dungeon.getGraph();
     String directionInfo = "The player can move to: ";
-    List<LocationImpl> adjLocationImpls = graph.getAdjacentLocations(locationImpl);
-    for (LocationImpl adjLocationImpl : adjLocationImpls) {
+    List<Location> adjLocationImpls = graph.getAdjacentLocations(locationImpl);
+    for (Location adjLocationImpl : adjLocationImpls) {
       //When meet this requirements, a player can move to North.
       if ((adjLocationImpl.getCol() == locationImpl.getCol()
               && adjLocationImpl.getRow() == locationImpl.getRow() - 1)

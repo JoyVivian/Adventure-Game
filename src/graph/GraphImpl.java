@@ -94,11 +94,11 @@ public class GraphImpl implements Graph {
   }
 
   @Override
-  public List<LocationImpl> getAdjacentLocations(Location v) throws IllegalArgumentException {
+  public List<Location> getAdjacentLocations(Location v) throws IllegalArgumentException {
     if (v == null) {
       throw new IllegalArgumentException("Location should not be null");
     }
-    List<LocationImpl> adjacentLocationImpls = new ArrayList<>();
+    List<Location> adjacentLocationImpls = new ArrayList<>();
     List<Integer> adjacentNodes = this.getAdjacentNodes(v.getId(colNum));
     for (int w : adjacentNodes) {
       adjacentLocationImpls.add(this.getLocation(w));

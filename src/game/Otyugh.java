@@ -19,6 +19,10 @@ public class Otyugh {
     return this.health;
   }
 
+  public void loseHealth() {
+    this.health -= 50;
+  }
+
 
   @Override
   public String toString() {
