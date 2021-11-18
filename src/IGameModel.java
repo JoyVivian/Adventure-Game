@@ -30,4 +30,8 @@ public interface IGameModel {
   Player getPlayer();
 
   String getDangerType();
+
+  boolean isEaten(boolean isRandom);
+
+  boolean isWin();
 }

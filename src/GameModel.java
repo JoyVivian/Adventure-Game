@@ -9,6 +9,8 @@ import game.Otyugh;
 import game.Player;
 import game.PlayerImpl;
 import graph.Graph;
+import random.RandomFactory;
+import random.RandomValue;
 
 public class GameModel implements IGameModel {
   private final Dungeon dungeon;
@@ -31,9 +33,10 @@ public class GameModel implements IGameModel {
     //When meet this requirements, a player can move to North.
     List<Location> adjLocations = graph.getAdjacentLocations(curLoc);
     for (Location adjLoc : adjLocations) {
+      //When meet this requirements, a player can move to North.
       if ((adjLoc.getCol() == curLoc.getCol()
               && adjLoc.getRow() == curLoc.getRow() - 1)
-              || (adjLoc.getRow() == 1
+              || (curLoc.getRow() == 1
               && adjLoc.getRow() == graph.getRowNum())) {
         directions.add(Direction.North);
       }
@@ -127,6 +130,7 @@ public class GameModel implements IGameModel {
         return false;
       } else {
         boolean isAlive = false;
+        //TODO: Kill the Otyugh have half blood firstly.
         for (Otyugh otyugh : otyughs) {
           if (otyugh.getHealth() > 0) {
             otyugh.loseHealth();
@@ -165,7 +169,7 @@ public class GameModel implements IGameModel {
         if (nextLoc.getIsCave()) {
           return slayOtyRecur(direction, distance - 1, nextLoc);
         } else {
-          return slayOtyRecur(direction,  distance, nextLoc);
+          return slayOtyRecur(direction, distance, nextLoc);
         }
       } else {
         List<Direction> dirs = this.getNextDir(curLoc);
@@ -203,5 +207,43 @@ public class GameModel implements IGameModel {
   public String getDangerType() {
     //TODO: Add more specific description.
     return this.dungeon.findSmell(this.player.getLocation()).toString();
+  }
+
+  @Override
+  public boolean isEaten(boolean isRandom) {
+    List<Otyugh> otyughs = this.player.getLocation().getOtyughs();
+    boolean isEat = false;
+    int halfNum = 0;
+
+    for (Otyugh otyugh : otyughs) {
+      if (otyugh.getHealth() == 0) {
+        continue;
+      } else if (otyugh.getHealth() == 50) {
+        if (halfNum > 0) {
+          return false;
+        } else {
+          RandomFactory randomFactory = new RandomFactory();
+          RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 0, 1);
+          int result = randomValueIns.getRandomValue();
+
+          if (result == 0) {
+            return false;
+          } else {
+            halfNum++;
+            return true;
+          }
+        }
+      } else {
+        isEat = true;
+      }
+    }
+
+    return isEat;
+  }
+
+  @Override
+  public boolean isWin() {
+    Location endLoc = this.dungeon.getEnd();
+    return (this.player.getLocation() == endLoc && isEaten(true));
   }
 }
