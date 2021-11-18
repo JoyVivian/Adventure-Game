@@ -1,0 +1,164 @@
+You smell something very horrible here.
+You are in a cave
+Door leads to: N, E, S
+You find 1 Diamond here
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? N
+You smell something horrible here.
+You are in a tunnel
+Door leads to: W, S
+You find 1 arrow here
+Move, Pickup, or Shoot(M-P-S)?
+P
+What? arrow
+You picked up 1 arrows.
+You smell something horrible here.
+You are in a tunnel
+Door leads to: W, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? W
+You are safe right now.
+You are in a cave
+Door leads to: E, W, S
+You find 1 Sapphire here
+You find 2 arrow here
+Move, Pickup, or Shoot(M-P-S)?
+P
+What? arrow
+You picked up 2 arrows.
+You are safe right now.
+You are in a cave
+Door leads to: E, W, S
+You find 1 Sapphire here
+Move, Pickup, or Shoot(M-P-S)?
+P
+What? Sapphire
+You picked up a Sapphire
+You are safe right now.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? W
+You are safe right now.
+You are in a tunnel
+Door leads to: E, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? S
+You are safe right now.
+You are in a tunnel
+Door leads to: N, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? S
+You are safe right now.
+You are in a tunnel
+Door leads to: S, N
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? S
+You are safe right now.
+You are in a cave
+Door leads to: N, E, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? S
+You are safe right now.
+You are in a cave
+Door leads to: N
+You find 1 arrow here
+Move, Pickup, or Shoot(M-P-S)?
+P
+What? arrow
+You picked up 1 arrows.
+You are safe right now.
+You are in a cave
+Door leads to: N
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? N
+You are safe right now.
+You are in a cave
+Door leads to: N, E, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? E
+You smell something very horrible here.
+You are in a cave
+Door leads to: W, N, E, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? E
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? S
+You shoot an arrow into the darkness.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You smell something very horrible here.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+No. of caves (1-5)? 1
+Where to? E
+You hear a great howl in the distance.
+You are safe right now.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+S
+You are run out of your arrow. Please explore to find more.
+You are safe right now.
+You are in a cave
+Door leads to: E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? E
+Congratulations! You win!
+Process finished with exit code 0

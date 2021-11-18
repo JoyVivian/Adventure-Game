@@ -81,4 +81,10 @@ public interface Location {
    * @return An integer represents the number of the arrows in the location.
    */
   int getArrows();
+
+  void removeTreasure(Treasure treasure);
+
+  void removeArrows();
+
+  void decreaseArrow();
 }

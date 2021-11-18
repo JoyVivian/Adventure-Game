@@ -100,6 +100,31 @@ public class LocationImpl implements Location {
   }
 
   @Override
+  public void removeTreasure(Treasure treasure) throws IllegalArgumentException {
+    if (treasure == null) {
+      throw new IllegalArgumentException("The treasure to remove could not be null");
+    }
+
+    for (int i = 0; i < treasureList.size(); i++) {
+      if (treasureList.get(i) == treasure) {
+        treasureList.remove(i);
+        break;
+      }
+    }
+
+  }
+
+  @Override
+  public void removeArrows() {
+    this.arrowNum = 0;
+  }
+
+  @Override
+  public void decreaseArrow() {
+    this.arrowNum--;
+  }
+
+  @Override
   public String toString() {
     return "Location{" +
             "col=" + col +

@@ -6,7 +6,7 @@ package game;
  * 2 will be encoded to South; 3 will be encoded to West.
  */
 public enum Direction {
-  North("North"), East("East"), South("South"), West("West");
+  North("N"), East("E"), South("S"), West("W");
 
   private Direction(String name) {
     this.name = name;

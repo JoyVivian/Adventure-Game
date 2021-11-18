@@ -51,10 +51,7 @@ public interface Player {
    */
   int getArrowNum();
 
-  /**
-   * To add or minus arrows of this player.
-   *
-   * @param changeNum The number that should change the arrows.
-   */
-  void setArrowNum(int changeNum);
+  void pickUpArrows(int pickNum);
+
+  void decreaseArrows();
 }

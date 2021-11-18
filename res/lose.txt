@@ -1,0 +1,25 @@
+You are safe right now.
+You are in a cave
+Door leads to: N
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? E
+You entered a wrong direction. Please enter a direction according to the prompt.
+Where to? N
+You smell something horrible here.
+You are in a tunnel
+Door leads to: E, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? M
+You entered a wrong direction. Please enter a direction according to the prompt.
+Where to? E
+You smell something very horrible here.
+You are in a cave
+Door leads to: N, E, W, S
+Move, Pickup, or Shoot(M-P-S)?
+M
+Where to? E
+Chomp, chomp, chomp, you are eaten by an Otyugh!
+Better luck next time
+Process finished with exit code 0

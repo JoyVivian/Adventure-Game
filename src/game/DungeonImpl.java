@@ -163,7 +163,9 @@ public class DungeonImpl implements Dungeon {
 
     //Add Otyughs to the Dungeon.
     addOtyughs(otyNum, isRandom);
-
+    System.out.println(printDungeon());
+    System.out.println("startlocation is: " + startLoc);
+    System.out.println("\nend location is: " + endLoc);
   }
 
   //TODO: Add some code for test purpose.
@@ -445,12 +447,11 @@ public class DungeonImpl implements Dungeon {
           otyughNum++;
         }
       }
+
       if (otyughNum > 1) {
         return Danger.MORESMELL;
       } else if (otyughNum == 1) {
         return Danger.LESSSMELL;
-      } else {
-        return Danger.NODANGER;
       }
     }
 

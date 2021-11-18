@@ -61,8 +61,13 @@ public class PlayerImpl implements Player {
   }
 
   @Override
-  public void setArrowNum(int changeNum) {
-      this.arrowNum += changeNum;
+  public void pickUpArrows(int pickNum) {
+    this.arrowNum += pickNum;
+  }
+
+  @Override
+  public void decreaseArrows() {
+    this.arrowNum--;
   }
 
   //Consider to display this information in the driver class.
@@ -74,6 +79,4 @@ public class PlayerImpl implements Player {
     }
     return collectedInfo;
   }
-
-
 }
