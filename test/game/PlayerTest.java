@@ -54,7 +54,7 @@ public class PlayerTest {
     player.pickUp(treasureR);
     player.pickUp(treasureS);
 
-    assertEquals("DIAMOND\tRUBIE\tSAPPHIRE\t", player.getCollected());
+    assertEquals("Diamond\tRubie\tSapphire\t", player.getCollected());
   }
 
   @Test
@@ -67,7 +67,7 @@ public class PlayerTest {
     player.pickUp(treasureR);
     player.pickUp(treasureS);
 
-    assertEquals("DIAMOND\tRUBIE\tSAPPHIRE\t", player.getCollected());
+    assertEquals("Diamond\tRubie\tSapphire\t", player.getCollected());
   }
 
   @Test
@@ -83,7 +83,7 @@ public class PlayerTest {
 
     player.pickUpAll(locationImplWithTreasure);
 
-    assertEquals("DIAMOND\tRUBIE\tSAPPHIRE\t", player.getCollected());
+    assertEquals("Diamond\tRubie\tSapphire\t", player.getCollected());
   }
 
   @Test

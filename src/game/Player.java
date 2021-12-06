@@ -26,7 +26,7 @@ public interface Player {
    * Get the information about what treasures have been collected.
    *
    * @return A string contains information about what treasures have
-   * been collected.
+   *     been collected.
    */
   String getCollected();
 
@@ -51,7 +51,15 @@ public interface Player {
    */
   int getArrowNum();
 
+  /**
+   * When a player pick up an arrow, the number of arrows in his bag should increase.
+   *
+   * @param pickNum The number of arrows that the player picks up.
+   */
   void pickUpArrows(int pickNum);
 
+  /**
+   * When a player shoot, the number of arrows in the palyer's bag should minus.
+   */
   void decreaseArrows();
 }

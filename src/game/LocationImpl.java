@@ -120,11 +120,6 @@ public class LocationImpl implements Location {
   }
 
   @Override
-  public void decreaseArrow() {
-    this.arrowNum--;
-  }
-
-  @Override
   public String toString() {
     return "Location{" +
             "col=" + col +

@@ -68,7 +68,6 @@ public class DungeonImpl implements Dungeon {
     this.colNum = cols >= 5 ? cols : 5;
     this.interconnectivity = connectivity;
     boolean isWrap = isWrapping;
-    int treasurePercentage = treasurePer;
     this.graph = new GraphImpl(rowNum, this.colNum);
     int vertexNum = rows * cols;
     this.uf = new UfImpl(vertexNum);
@@ -96,6 +95,7 @@ public class DungeonImpl implements Dungeon {
 
     //Add treasures to caves.
     //Find the exact number of caves that should be assigned treasures.
+    int treasurePercentage = treasurePer;
     int numCaves = (int) Math.ceil(treasurePercentage / 100.0 * caveNum);
     int j = 1;
     for (int i = numCaves; i >= 1; i--) {
@@ -150,8 +150,8 @@ public class DungeonImpl implements Dungeon {
       } else {
         this.end--;
         if (this.end < 1) {
-          throw new IllegalArgumentException("" +
-                  "This graph cannot have a path that start and end have a length 5");
+          throw new IllegalArgumentException(""
+                  + "This graph cannot have a path that start and end have a length 5");
         }
       }
 
@@ -163,12 +163,7 @@ public class DungeonImpl implements Dungeon {
 
     //Add Otyughs to the Dungeon.
     addOtyughs(otyNum, isRandom);
-    System.out.println(printDungeon());
-    System.out.println("startlocation is: " + startLoc);
-    System.out.println("\nend location is: " + endLoc);
   }
-
-  //TODO: Add some code for test purpose.
 
   /**
    * To assign monsters randomly to the dungeon.
@@ -201,7 +196,8 @@ public class DungeonImpl implements Dungeon {
 
       //Assign the remain Otyughs randomly.
       RandomFactory randomFactory = new RandomFactory();
-      RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom, 0, caveList.size() - 1);
+      RandomValue randomValueIns = randomFactory.createRandomInstance(isRandom,
+              0, caveList.size() - 1);
       int randomValue = randomValueIns.getRandomValue();
 
       Location randomCave = caveList.get(randomValue);
@@ -362,8 +358,8 @@ public class DungeonImpl implements Dungeon {
     }
 
     //Interconnectivity can not be greater than the number of leftoverEdges.
-    int moreEdges = this.interconnectivity > leftoverEdge.size() ?
-            leftoverEdge.size() : this.interconnectivity;
+    int moreEdges = this.interconnectivity > leftoverEdge.size()
+            ? leftoverEdge.size() : this.interconnectivity;
     //Add leftover edges to graph.
     Iterator it = leftoverEdge.entrySet().iterator();
     for (int i = moreEdges; i > 0; i--) {
@@ -491,9 +487,9 @@ public class DungeonImpl implements Dungeon {
       locationInfo += this.graph.getLocation(i).toString() + "\n";
     }
 
-    String dungeonInfo = "The graph is: " + this.graph.toString() +
-            "\n" +
-            "The information on this location is: \n" + locationInfo;
+    String dungeonInfo = "The graph is: " + this.graph.toString()
+            + "\n"
+            + "The information on this location is: \n" + locationInfo;
     return dungeonInfo;
   }
 }

@@ -82,9 +82,17 @@ public interface Location {
    */
   int getArrows();
 
+  /**
+   * When a player picks up a treasure. The treasure should be removed from the current location.
+   * This method is used to remove the treasure from the current location.
+   *
+   * @param treasure The treasure that should be removed from the current location.
+   */
   void removeTreasure(Treasure treasure);
 
+  /**
+   * When a player picks up arrows. The arrows should be removed from the current location.
+   * This method is used to remove the arrows from the current location.
+   */
   void removeArrows();
-
-  void decreaseArrow();
 }

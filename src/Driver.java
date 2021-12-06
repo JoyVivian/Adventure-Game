@@ -1,19 +1,15 @@
-import dfs.Dfs;
-import dfs.DfsImpl;
-import game.Direction;
-import game.Dungeon;
-import game.DungeonImpl;
-import game.Location;
-import game.LocationImpl;
-import game.Player;
-import game.PlayerImpl;
-import graph.Graph;
+import controller.Controller;
+import controller.ControllerImpl;
+import model.GameModel;
+import model.GameModelImpl;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
-import static java.lang.System.*;
+import static java.lang.System.err;
+import static java.lang.System.exit;
+import static java.lang.System.in;
+import static java.lang.System.out;
 
 /**
  * This is a Driver class that shows how the model works.
@@ -83,15 +79,14 @@ public class Driver {
     }
 
     try {
-      GameModel gameModel = new GameModelImpl(rowNum, colNum, interconnectivity, isWrap, percentage, otyNum, true);
+      GameModel gameModel = new GameModelImpl(rowNum, colNum,
+              interconnectivity, isWrap, percentage, otyNum, true);
       Readable reader = new InputStreamReader(in);
       Controller controller = new ControllerImpl(reader, out);
-      controller.playGame(gameModel);
+      controller.playGame(gameModel, true);
     } catch (IOException e) {
       e.printStackTrace();
     }
 
   }
-
-
 }

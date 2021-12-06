@@ -2,23 +2,35 @@ package game;
 
 import java.util.Objects;
 
+/**
+ * This class represents an Otyugh. An Otyugh has health of
+ * 100 initially but can be shot by an arrow. Two shoots will
+ * kill one Otyugh.
+ */
 public class Otyugh {
   private int health;
 
+  /**
+   * This is the constructor of Otyugh to initialize the
+   * health of one Otyugh's health to 100.
+   */
   public Otyugh() {
     this.health = 100;
   }
 
-  public void hit() {
-    if (this.health != 0) {
-      this.health -= 50;
-    }
-  }
-
+  /**
+   * Get the health value of the Otyugh.
+   *
+   * @return An integer represents the health value of the Otyugh.
+   */
   public int getHealth() {
     return this.health;
   }
 
+  /**
+   * When hit by an arrow, an otyugh will lose 50 points of health.
+   * This method is used to minus the health value of it.
+   */
   public void loseHealth() {
     this.health -= 50;
   }
