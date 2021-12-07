@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import game.Direction;
 import game.Otyugh;
 import game.Treasure;
 import model.GameModel;
@@ -38,10 +39,17 @@ public class GuiControllerImpl implements GuiController {
     }
 
     this.view.setVisible();
+    this.view.addClickListener(this);
   }
 
   @Override
   public void handleCellClick(int x, int y) {
+    Direction direction = this.calDir(x, y);
+    List<Direction> dirs = this.model.getNextDirList();
+
+    if (direction != null && dirs.contains(direction)) {
+      this.model.move(direction);
+    }
 
   }
 
@@ -81,6 +89,7 @@ public class GuiControllerImpl implements GuiController {
    */
   private String getImgPath() {
     String dirs = this.model.getNextDirs();
+    System.out.println(String.format("dirs are: %s", dirs));
     dirs = dirs.replaceAll(", ", "");
     String orderedStr = "";
 
@@ -126,7 +135,8 @@ public class GuiControllerImpl implements GuiController {
     return combined;
   }
 
-  private BufferedImage addObjects(BufferedImage image) throws RuntimeException {
+  //TODO
+  private BufferedImage addObjects(BufferedImage image, int curGridRow, int curGridCol) throws RuntimeException {
     BufferedImage combinedImage = image;
     int offset = 10;
     int arrowNum = this.model.getArrowNum();
@@ -137,7 +147,6 @@ public class GuiControllerImpl implements GuiController {
      */
     //Add arrow image to the dungeon image if there exists arrow.
     if (arrowNum > 0) {
-      System.out.println("Do have arrow");
       String arrowImgPath = "res/images/arrow-white.png";
       try {
         combinedImage = this.overlay(image, arrowImgPath, offset);
@@ -150,12 +159,12 @@ public class GuiControllerImpl implements GuiController {
     List<Treasure> treasureList = this.model.getTreasureList();
     if (treasureList.size() != 0 ) {
       for (Treasure treasure : treasureList) {
-        System.out.println("Do have treasures");
         String treasureImgPath = String.format("res/images/%s.png", treasure.toString().toLowerCase());
         try {
           offset += 10;
           combinedImage = this.overlay(combinedImage, treasureImgPath, offset);
         } catch (IOException e) {
+          System.out.println(treasureImgPath);
           throw new RuntimeException("Image loads failed.");
         }
       }
@@ -165,7 +174,6 @@ public class GuiControllerImpl implements GuiController {
     List<Otyugh> otyughList = this.model.getOtyughs();
     if (otyughList.size() != 0) {
       for (Otyugh otyugh : otyughList) {
-        System.out.println("Do have otyughs");
         String otyughImgPath = String.format("res/images/otyugh.png");
         try {
           offset += 10;
@@ -176,7 +184,8 @@ public class GuiControllerImpl implements GuiController {
       }
     }
 
-    //Add a player image to the dungeon image.
+    //TODO: Add a player image to the dungeon image if the player currently in this dungeon.
+
     try {
       String playerImagePath = String.format("res/images/player.png");
       offset += 10;
@@ -185,9 +194,85 @@ public class GuiControllerImpl implements GuiController {
       throw new RuntimeException("Image loada failed.");
     }
 
-    //TODO: Add a smell image to the dungeon image if it has smell.
-
+    //Add a smell image to the dungeon image if it has smell.
+    String dangerType = this.model.getDangerType();
+    if (dangerType.equals("Less smell")) {
+      String stenchLess = String.format("res/images/stench01.png");
+      offset += 10;
+      try {
+        combinedImage = this.overlay(combinedImage, stenchLess, offset);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else if (dangerType.equals("More smell")) {
+      String stenchMore = String.format("res/images/stench02.png");
+      offset += 10;
+      try {
+        combinedImage = this.overlay(combinedImage, stenchMore, offset);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
     return combinedImage;
+  }
+
+  /**
+   * Arithmetic method to convert the x, y coords from the view to
+   * row and col coords of the Dungeon.
+   * @param x The x coord get from the view.
+   * @param y The y coord get from the view.
+   * @return rowCol[0] represents row, rowCol[1] represents col.
+   */
+  private int[] calRowCol(int x, int y) {
+    int[] rowCol = new int[2];
+    rowCol[0] = 0;
+    rowCol[1] = 0;
+
+    int imgPanelWidth = this.model.getColNum() * Util.IMGSIZE;
+    int imgPanelHeight = this.model.getRowNum() * Util.IMGSIZE;
+
+    if (x <= imgPanelWidth && y <= imgPanelHeight) {
+      if (y % Util.IMGSIZE == 0) {
+        rowCol[0] = y / Util.IMGSIZE;
+      } else {
+        rowCol[0] = y / Util.IMGSIZE + 1;
+      }
+
+      if (x % Util.IMGSIZE == 0) {
+        rowCol[1] = x / Util.IMGSIZE;
+      } else {
+        rowCol[1] = x / Util.IMGSIZE + 1;
+      }
+    }
+
+    return rowCol;
+  }
+
+  //find the direction of the player clicked.
+  private Direction calDir(int x, int y) {
+    Direction direction = null;
+    int[] rowCol = this.calRowCol(x, y);
+
+    int row = rowCol[0];
+    int col = rowCol[1];
+
+    int curRow = this.model.getCurRow();
+    int curCol = this.model.getCurCol();
+
+    if ((row == curRow - 1 && col == curCol) ||
+            (row == this.model.getRowNum() && col == curCol && this.model.isWrap())) {
+      direction = Direction.North;
+    } else if ((row == curRow + 1 && col == curCol) ||
+            (row == 1 && col == curCol && this.model.isWrap())) {
+      direction = Direction.South;
+    } else if ((row == curRow && col == curCol - 1) ||
+            (row == curRow && col == this.model.getColNum() && this.model.isWrap())) {
+      direction = Direction.West;
+    } else if ((row == curRow && col == curCol + 1) ||
+            (row == curRow && col == 1 && this.model.isWrap())) {
+      direction = Direction.East;
+    }
+    return direction;
   }
 
   public void restartGame() {

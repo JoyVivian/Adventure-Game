@@ -8,4 +8,5 @@ public interface GuiController {
   public void handleCellClick(int x, int y);
 
   public void handleKeyPress();
+
 }

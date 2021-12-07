@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class GameSettingFrame extends JFrame {
+class GameSettingFrame extends JFrame {
   public GameSettingFrame() {
     this.setLayout(new GridLayout(7, 2));
     JLabel rowNum = new JLabel("number of rows");

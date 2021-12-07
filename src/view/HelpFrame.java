@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class HelpFrame extends JFrame {
+class HelpFrame extends JFrame {
   public HelpFrame() {
     this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 

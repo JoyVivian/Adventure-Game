@@ -8,13 +8,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class MessagePanel extends JPanel {
+class MessagePanel extends JPanel {
   public MessagePanel() {
     JPanel objectPanel = new JPanel();
     objectPanel.setLayout(new GridLayout(2, 4));
     JLabel ruby = new JLabel();
     try {
-      File file = new File("res/images/ruby.png");
+      File file = new File("res/images/rubie.png");
       BufferedImage image = ImageIO.read(file);
       ruby.setIcon(new ImageIcon(image));
     } catch (IOException e) {

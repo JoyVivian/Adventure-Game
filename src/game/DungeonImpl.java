@@ -32,6 +32,7 @@ public class DungeonImpl implements Dungeon {
   private final Uf uf;
   private int start;
   private int end;
+  private boolean isWrap;
 
   /**
    * The constructor of DungeonImpl get 5 arguments and
@@ -67,12 +68,12 @@ public class DungeonImpl implements Dungeon {
     int rowNum = rows >= 5 ? rows : 5;
     this.colNum = cols >= 5 ? cols : 5;
     this.interconnectivity = connectivity;
-    boolean isWrap = isWrapping;
+    this.isWrap = isWrapping;
     this.graph = new GraphImpl(rowNum, this.colNum);
     int vertexNum = rows * cols;
     this.uf = new UfImpl(vertexNum);
 
-    if (!isWrap) {
+    if (!this.isWrap) {
       createNoWrapDun(vertexNum, isRandom);
     } else {
       createNoWrapDun(vertexNum, isRandom);
@@ -452,6 +453,11 @@ public class DungeonImpl implements Dungeon {
     }
 
     return Danger.NODANGER;
+  }
+
+  @Override
+  public Boolean isWrapped() {
+    return this.isWrap;
   }
 
   @Override

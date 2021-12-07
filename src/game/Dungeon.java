@@ -51,4 +51,11 @@ public interface Dungeon {
    * @return A Danger Enum that represents the type of danger.
    */
   Danger findSmell(Location curLoc);
+
+  /**
+   * Find whether a Dungeon is wrapped or not.
+   *
+   * @return A boolean represents a dungeon is wrapped or not.
+   */
+  Boolean isWrapped();
 }

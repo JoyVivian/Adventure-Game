@@ -6,10 +6,16 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class DungeonPane extends JScrollPane {
+class DungeonPane extends JScrollPane {
+  private ImagePanel imgPanel;
+
   public DungeonPane(int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
     this.setPreferredSize(new Dimension(500, 400));
-    ImagePanel imgPanel = new ImagePanel(rows, cols, startRow, startCol, image);
+    imgPanel = new ImagePanel(rows, cols, startRow, startCol, image);
     this.setViewportView(imgPanel);
+  }
+
+  ImagePanel getImgPanel() {
+    return this.imgPanel;
   }
 }

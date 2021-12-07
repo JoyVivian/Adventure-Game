@@ -10,7 +10,7 @@ import javax.swing.*;
 import model.GameModel;
 import model.GameModelImpl;
 
-public class GuiTest extends JFrame {
+class GuiTest extends JFrame {
   public GuiTest() {
     GameModel model = new GameModelImpl(5, 5, 0, false, 20, 5, true);
     String imgPath = String.format("res/images/%s.png", this.getStartImgPath(model));

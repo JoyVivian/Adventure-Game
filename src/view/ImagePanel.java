@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class ImagePanel extends JPanel {
+class ImagePanel extends JPanel {
   private final int rows;
   private final int cols;
   private SingleImageLabel[][] imageLabels;
@@ -17,9 +17,14 @@ public class ImagePanel extends JPanel {
 
 
     this.setSize(this.calPanelWid(), this.calPanelHei());
-    this.setLayout(new GridLayout(rows, cols));
+    GridLayout grid = new GridLayout(rows, cols);
 
-    imageLabels = new SingleImageLabel[rows+1][cols+1];
+    grid.setHgap(0);
+    grid.setVgap(0);
+
+    this.setLayout(grid);
+
+    imageLabels = new SingleImageLabel[rows + 1][cols + 1];
 
     for (int i = 1; i <= rows; i++) {
       for (int j = 1; j <= cols; j++) {
@@ -40,5 +45,9 @@ public class ImagePanel extends JPanel {
 
   private int calPanelHei() {
     return this.rows * Util.IMGSIZE;
+  }
+
+  public void setImg(BufferedImage image, int row, int col) {
+    imageLabels[row][col].setIcon(new ImageIcon(image));
   }
 }

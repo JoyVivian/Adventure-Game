@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class SingleImageLabel extends JLabel {
+class SingleImageLabel extends JLabel {
   public SingleImageLabel() throws RuntimeException {
    try {
      File file = new File("res/images/blank.png");

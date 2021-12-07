@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class GameMenuBar extends JMenuBar {
+class GameMenuBar extends JMenuBar {
   public GameMenuBar() {
     JMenu game = new JMenu("Game");
     JMenuItem exitGame = new JMenuItem("Exit game");
