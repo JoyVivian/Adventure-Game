@@ -45,7 +45,7 @@ public interface Player {
   Location getLocation();
 
   /**
-   * Get the current number of arrows of this player.ß
+   * Get the current number of arrows of this player.
    *
    * @return An integer that represents the number of arrows.
    */

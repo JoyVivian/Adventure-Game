@@ -5,12 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 
 public class ImagePanel extends JPanel {
-  private final int imageSize = 64;
   private final int rows;
   private final int cols;
   private SingleImageLabel[][] imageLabels;
 
-  public ImagePanel(int rows, int cols) {
+  public ImagePanel(int rows, int cols, int startRow, int startCol, String imgPath) {
     this.rows = rows;
     this.cols = cols;
 
@@ -18,21 +17,26 @@ public class ImagePanel extends JPanel {
     this.setSize(this.calPanelWid(), this.calPanelHei());
     this.setLayout(new GridLayout(rows, cols));
 
-    imageLabels = new SingleImageLabel[rows][cols];
+    imageLabels = new SingleImageLabel[rows+1][cols+1];
 
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        this.imageLabels[i][j] = new SingleImageLabel();
-        this.add(imageLabels[i][j]);
+    for (int i = 1; i <= rows; i++) {
+      for (int j = 1; j <= cols; j++) {
+        if (i == startRow && j == startCol) {
+          this.imageLabels[i][j] = new SingleImageLabel(imgPath);
+          this.add(imageLabels[i][j]);
+        } else {
+          this.imageLabels[i][j] = new SingleImageLabel();
+          this.add(imageLabels[i][j]);
+        }
       }
     }
   }
 
   private int calPanelWid() {
-    return this.cols * imageSize;
+    return this.cols * Reference.IMGSIZE;
   }
 
   private int calPanelHei() {
-    return this.rows * imageSize;
+    return this.rows * Reference.IMGSIZE;
   }
 }

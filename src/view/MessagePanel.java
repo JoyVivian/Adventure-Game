@@ -32,7 +32,7 @@ public class MessagePanel extends JPanel {
 
     JLabel emerald = new JLabel();
     try {
-      File file = new File("res/images/emerald.png");
+      File file = new File("res/images/sapphire.png");
       BufferedImage image = ImageIO.read(file);
       emerald.setIcon(new ImageIcon(image));
     } catch (IOException e) {
