@@ -4,18 +4,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 
+import game.Otyugh;
 import game.Treasure;
 import model.GameModel;
-import view.ImagePanel;
+import view.Util;
 import view.View;
 import view.ViewImpl;
 
@@ -24,6 +22,10 @@ public class GuiControllerImpl implements GuiController {
   private GameModel model;
 
   public GuiControllerImpl(GameModel model) {
+    if (model == null) {
+      throw new IllegalArgumentException("Model cannot be null.");
+    }
+
     this.model = model;
     this.view = this.getInitialView(model);
   }
@@ -31,6 +33,10 @@ public class GuiControllerImpl implements GuiController {
 
   @Override
   public void playGame(GameModel model) {
+    if (model == null) {
+      throw new IllegalArgumentException("Model cannot be null.");
+    }
+
     this.view.setVisible();
   }
 
@@ -59,13 +65,12 @@ public class GuiControllerImpl implements GuiController {
     try {
       File file = new File(imgPath);
       BufferedImage image = ImageIO.read(file);
-      this.addObjects(image);
+      image = this.addObjects(image);
+      View view = new ViewImpl(model, rows, cols, startRow, startCol, image);
+      return view;
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");
     }
-
-    View view = new ViewImpl(model, rows, cols, startRow, startCol, imgPath);
-    return view;
   }
 
   /**
@@ -110,6 +115,8 @@ public class GuiControllerImpl implements GuiController {
 
   private BufferedImage overlay(BufferedImage starting, String fpath, int offset) throws IOException {
     BufferedImage overlay = ImageIO.read(new File(fpath));
+    //resize the overlay image to specific size.
+    overlay = Util.resizeImage(overlay, Util.OBJECTIMGSIZE, Util.OBJECTIMGSIZE);
     int w = Math.max(starting.getWidth(), overlay.getWidth());
     int h = Math.max(starting.getHeight(), overlay.getHeight());
     BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -121,32 +128,65 @@ public class GuiControllerImpl implements GuiController {
 
   private BufferedImage addObjects(BufferedImage image) throws RuntimeException {
     BufferedImage combinedImage = image;
+    int offset = 10;
     int arrowNum = this.model.getArrowNum();
 
+    /**
+     * Only add one image to the dungeon image because the number of each object
+     * will show up in a frame when the player try to pick up something.
+     */
     //Add arrow image to the dungeon image if there exists arrow.
     if (arrowNum > 0) {
+      System.out.println("Do have arrow");
       String arrowImgPath = "res/images/arrow-white.png";
       try {
-        combinedImage = this.overlay(image, arrowImgPath, 5);
+        combinedImage = this.overlay(image, arrowImgPath, offset);
       } catch (IOException e) {
         throw new RuntimeException("Image loads failed.");
       }
     }
 
-    //Add treasures' image to the Dungeon image if there exists treasure.
+    //Add treasure image to the Dungeon image if there exists treasure.
     List<Treasure> treasureList = this.model.getTreasureList();
     if (treasureList.size() != 0 ) {
       for (Treasure treasure : treasureList) {
+        System.out.println("Do have treasures");
         String treasureImgPath = String.format("res/images/%s.png", treasure.toString().toLowerCase());
         try {
-          combinedImage = this.overlay(image, treasureImgPath, 5);
+          offset += 10;
+          combinedImage = this.overlay(combinedImage, treasureImgPath, offset);
         } catch (IOException e) {
-          e.printStackTrace();
+          throw new RuntimeException("Image loads failed.");
         }
       }
     }
 
-    //TODO: Add monster image to the Dungeon image if there exists Otyugh.
+    //Add monster image to the Dungeon image if there exists Otyugh.
+    List<Otyugh> otyughList = this.model.getOtyughs();
+    if (otyughList.size() != 0) {
+      for (Otyugh otyugh : otyughList) {
+        System.out.println("Do have otyughs");
+        String otyughImgPath = String.format("res/images/otyugh.png");
+        try {
+          offset += 10;
+          combinedImage = this.overlay(combinedImage, otyughImgPath, offset);
+        } catch (IOException e) {
+          throw new RuntimeException("Image loads failed.");
+        }
+      }
+    }
+
+    //Add a player image to the dungeon image.
+    try {
+      String playerImagePath = String.format("res/images/player.png");
+      offset += 10;
+      combinedImage = this.overlay(combinedImage, playerImagePath, offset);
+    } catch (IOException e) {
+      throw new RuntimeException("Image loada failed.");
+    }
+
+    //TODO: Add a smell image to the dungeon image if it has smell.
+
     return combinedImage;
   }
 

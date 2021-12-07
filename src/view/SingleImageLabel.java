@@ -12,21 +12,17 @@ public class SingleImageLabel extends JLabel {
    try {
      File file = new File("res/images/blank.png");
      BufferedImage image = ImageIO.read(file);
-     this.setSize(Reference.IMGSIZE, Reference.IMGSIZE);
+     image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
+     this.setSize(Util.IMGSIZE, Util.IMGSIZE);
      this.setIcon(new ImageIcon(image));
    } catch (IOException e) {
      throw new RuntimeException("Image loads failed.");
    }
   }
 
-  public SingleImageLabel(String imgPath) throws RuntimeException {
-    try {
-      File file = new File(imgPath);
-      BufferedImage image = ImageIO.read(file);
-      this.setSize(Reference.IMGSIZE, Reference.IMGSIZE);
-      this.setIcon(new ImageIcon(image));
-    } catch (IOException e) {
-      throw new RuntimeException("Image loads failed.");
-    }
+  public SingleImageLabel(BufferedImage image) throws RuntimeException, IOException {
+    image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
+    this.setSize(Util.IMGSIZE, Util.IMGSIZE);
+    this.setIcon(new ImageIcon(image));
   }
 }

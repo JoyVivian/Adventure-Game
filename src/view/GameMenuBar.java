@@ -26,14 +26,18 @@ public class GameMenuBar extends JMenuBar {
     });
 
     JMenu help = new JMenu("Help");
-    help.addActionListener(new ActionListener() {
+    JMenuItem helpInfo = new JMenuItem("help information");
+    help.add(helpInfo);
+    HelpFrame helpFrame = new HelpFrame();
+    helpInfo.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-
+        helpFrame.setVisible(true);
       }
     });
 
     this.add(game);
     this.add(custom);
+    this.add(help);
   }
 }

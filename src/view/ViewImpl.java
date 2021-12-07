@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import javax.swing.*;
 
 import model.GameModel;
@@ -7,11 +10,11 @@ import model.GameModel;
 public class ViewImpl extends JFrame implements View {
   private GameModel model;
 
-  public ViewImpl(GameModel model, int rows, int cols, int startRow, int startCol, String imgPath) {
+  public ViewImpl(GameModel model, int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
     this.model = model;
-    GameBoardPanel gameBoardPanel = new GameBoardPanel(5, 5, startRow, startCol, imgPath);
+    GameBoardPanel gameBoardPanel = new GameBoardPanel(5, 5, startRow, startCol, image);
     GameMenuBar gameMenuBar = new GameMenuBar();
-    this.setSize(300, 300);
+    this.setSize(500, 700);
     this.getContentPane().add(gameBoardPanel);
     this.setJMenuBar(gameMenuBar);
   }
