@@ -7,6 +7,7 @@ public interface GuiController {
 
   public void handleCellClick(int x, int y);
 
-  public void handleKeyPress();
+  public void handleKeyPress(int keyCode);
 
+  public void handlePickUp(int pickDiaNum, int pickRubyNum, int pickSapphireNum, int pickArrowNum);
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class GuiControllerImpl implements GuiController {
 
     this.view.setVisible();
     this.view.addClickListener(this);
+    this.view.addKeyPressListener(this);
   }
 
   @Override
@@ -48,14 +50,97 @@ public class GuiControllerImpl implements GuiController {
     List<Direction> dirs = this.model.getNextDirList();
 
     if (direction != null && dirs.contains(direction)) {
+      this.changImg(false);
       this.model.move(direction);
+      this.changImg(true);
+    }
+  }
+
+  //https://www.youtube.com/watch?v=GAn5evoACsM
+  @Override
+  public void handleKeyPress(int keyCode) {
+    Direction direction;
+    List<Direction> dirs = this.model.getNextDirList();
+
+    switch (keyCode) {
+      case KeyEvent.VK_UP:
+        direction = Direction.North;
+        break;
+      case KeyEvent.VK_DOWN:
+        direction = Direction.South;
+        break;
+      case KeyEvent.VK_LEFT:
+        direction = Direction.West;
+        break;
+      case KeyEvent.VK_RIGHT:
+        direction = Direction.East;
+        break;
+      case KeyEvent.VK_P:
+        //TODO: show up pick up frame.
+        this.showUpPick(this);
+      default:
+        direction = null;
     }
 
+    if (direction != null && dirs.contains(direction)) {
+      this.changImg(false);
+      this.model.move(direction);
+      this.changImg(true);
+    }
   }
 
   @Override
-  public void handleKeyPress() {
+  public void handlePickUp(int pickDiaNum, int pickRubyNum, int pickSapphireNum, int pickArrowNum) {
+    for (int i = pickDiaNum; i > 0; i--) {
+      this.model.pickUpTreasure(Treasure.DIAMOND);
+    }
 
+    for (int i = pickRubyNum; i > 0; i--) {
+      this.model.pickUpTreasure(Treasure.RUBIE);
+    }
+
+    for (int i = pickSapphireNum; i > 0; i--) {
+      this.model.pickUpTreasure(Treasure.SAPPHIRE);
+    }
+
+    if (pickArrowNum > 0) {
+      this.model.pickUpArrows();
+    }
+
+    //Change the pic of the current location.
+    this.changImg(true);
+
+    //TODO: change the number of the message board.
+    int diaNum = this.model.getPlayerTreasureNum(Treasure.DIAMOND);
+    int rubyNum = this.model.getPlayerTreasureNum(Treasure.RUBIE);
+    int sapphireNum = this.model.getPlayerTreasureNum(Treasure.SAPPHIRE);
+    int arrowNum = this.model.getPlayArrowNum();
+
+    this.view.updateMessageBoard(diaNum, rubyNum, sapphireNum, arrowNum);
+  }
+
+  private void showUpPick(GuiController guiController) {
+    int diamondNum = this.model.getTreasureNum(Treasure.DIAMOND);
+    int rubyNum = this.model.getTreasureNum(Treasure.RUBIE);
+    int sapphireNum = this.model.getTreasureNum(Treasure.SAPPHIRE);
+
+    int arrowNum = this.model.getArrowNum();
+
+    this.view.showUpPick(guiController, diamondNum, rubyNum, sapphireNum, arrowNum);
+  }
+
+  private void changImg(Boolean hasPlayer) {
+    String imgPath = String.format("res/images/%s.png", this.getImgPath());
+
+    try {
+      File file = new File(imgPath);
+      BufferedImage image = ImageIO.read(file);
+      image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
+      image = this.addObjects(image, hasPlayer);
+      this.view.updateLocationImg(image);
+    } catch (IOException e) {
+      throw new RuntimeException("Image loads failed.");
+    }
   }
 
   private View getInitialView(GameModel model) throws IllegalArgumentException, RuntimeException {
@@ -73,7 +158,7 @@ public class GuiControllerImpl implements GuiController {
     try {
       File file = new File(imgPath);
       BufferedImage image = ImageIO.read(file);
-      image = this.addObjects(image);
+      image = this.addObjects(image, true);
       View view = new ViewImpl(model, rows, cols, startRow, startCol, image);
       return view;
     } catch (IOException e) {
@@ -83,13 +168,12 @@ public class GuiControllerImpl implements GuiController {
 
   /**
    * Used to get the image file name from a string.
-   *     Note that the directions come in the order NSEW.
+   * Note that the directions come in the order NSEW.
    *
    * @return A string represents the file name of the image.
    */
   private String getImgPath() {
     String dirs = this.model.getNextDirs();
-    System.out.println(String.format("dirs are: %s", dirs));
     dirs = dirs.replaceAll(", ", "");
     String orderedStr = "";
 
@@ -135,8 +219,7 @@ public class GuiControllerImpl implements GuiController {
     return combined;
   }
 
-  //TODO
-  private BufferedImage addObjects(BufferedImage image, int curGridRow, int curGridCol) throws RuntimeException {
+  private BufferedImage addObjects(BufferedImage image, boolean hasPlayer) throws RuntimeException {
     BufferedImage combinedImage = image;
     int offset = 10;
     int arrowNum = this.model.getArrowNum();
@@ -157,14 +240,13 @@ public class GuiControllerImpl implements GuiController {
 
     //Add treasure image to the Dungeon image if there exists treasure.
     List<Treasure> treasureList = this.model.getTreasureList();
-    if (treasureList.size() != 0 ) {
+    if (treasureList.size() != 0) {
       for (Treasure treasure : treasureList) {
         String treasureImgPath = String.format("res/images/%s.png", treasure.toString().toLowerCase());
         try {
           offset += 10;
           combinedImage = this.overlay(combinedImage, treasureImgPath, offset);
         } catch (IOException e) {
-          System.out.println(treasureImgPath);
           throw new RuntimeException("Image loads failed.");
         }
       }
@@ -184,19 +266,19 @@ public class GuiControllerImpl implements GuiController {
       }
     }
 
-    //TODO: Add a player image to the dungeon image if the player currently in this dungeon.
-
-    try {
-      String playerImagePath = String.format("res/images/player.png");
-      offset += 10;
-      combinedImage = this.overlay(combinedImage, playerImagePath, offset);
-    } catch (IOException e) {
-      throw new RuntimeException("Image loada failed.");
+    if (hasPlayer) {
+      try {
+        String playerImagePath = String.format("res/images/player.png");
+        offset += 10;
+        combinedImage = this.overlay(combinedImage, playerImagePath, offset);
+      } catch (IOException e) {
+        throw new RuntimeException("Image loada failed.");
+      }
     }
 
     //Add a smell image to the dungeon image if it has smell.
     String dangerType = this.model.getDangerType();
-    if (dangerType.equals("Less smell")) {
+    if (dangerType.equals("You smell something horrible here.\n")) {
       String stenchLess = String.format("res/images/stench01.png");
       offset += 10;
       try {
@@ -204,7 +286,7 @@ public class GuiControllerImpl implements GuiController {
       } catch (IOException e) {
         e.printStackTrace();
       }
-    } else if (dangerType.equals("More smell")) {
+    } else if (dangerType.equals("You smell something very horrible here.\n")) {
       String stenchMore = String.format("res/images/stench02.png");
       offset += 10;
       try {
@@ -219,6 +301,7 @@ public class GuiControllerImpl implements GuiController {
   /**
    * Arithmetic method to convert the x, y coords from the view to
    * row and col coords of the Dungeon.
+   *
    * @param x The x coord get from the view.
    * @param y The y coord get from the view.
    * @return rowCol[0] represents row, rowCol[1] represents col.

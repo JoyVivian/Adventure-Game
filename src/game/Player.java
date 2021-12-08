@@ -62,4 +62,12 @@ public interface Player {
    * When a player shoot, the number of arrows in the palyer's bag should minus.
    */
   void decreaseArrows();
+
+  /**
+   * Get the number of a specific treasure that a player currently has.
+   *
+   * @param treasure One specific treasure that should be looked for.
+   * @return An integer represents the number of a specific treasure that a player has.
+   */
+  int getPlayerTreasureNum(Treasure treasure);
 }

@@ -70,6 +70,17 @@ public class PlayerImpl implements Player {
     this.arrowNum--;
   }
 
+  @Override
+  public int getPlayerTreasureNum(Treasure treasure) {
+    int treasureNum = 0;
+    for (Treasure treasureIter : this.treasures) {
+      if (treasureIter.equals(treasure)) {
+        treasureNum++;
+      }
+    }
+    return treasureNum;
+  }
+
   //Consider to display this information in the driver class.
   @Override
   public String getCollected() {
@@ -79,4 +90,6 @@ public class PlayerImpl implements Player {
     }
     return collectedInfo;
   }
+
+
 }

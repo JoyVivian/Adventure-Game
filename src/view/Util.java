@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Util {
   public static final int IMGSIZE = 128;
-  public static final int OBJECTIMGSIZE = 20;
+  public static final int OBJECTIMGSIZE = 30;
 
   //How to resize a BufferImage instance.
   //Reference Link: https://www.baeldung.com/java-resize-image

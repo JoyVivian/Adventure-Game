@@ -9,6 +9,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 class MessagePanel extends JPanel {
+  private JLabel diaLabel;
+  private JLabel rubyLabel;
+  private JLabel sapphireLabel;
+  private JLabel arrowLabel;
+
   public MessagePanel() {
     JPanel objectPanel = new JPanel();
     objectPanel.setLayout(new GridLayout(2, 4));
@@ -48,19 +53,19 @@ class MessagePanel extends JPanel {
       throw new RuntimeException("Image loads failed.");
     }
 
-    JLabel rubyNum = new JLabel("  0");
-    JLabel diamondNum = new JLabel("  0");
-    JLabel emeraldNum = new JLabel("  0");
-    JLabel arrowNum = new JLabel("  3");
+    rubyLabel = new JLabel("  0");
+    diaLabel = new JLabel("  0");
+    sapphireLabel = new JLabel("  0");
+    arrowLabel = new JLabel("  3");
 
     objectPanel.add(ruby);
     objectPanel.add(diamond);
     objectPanel.add(emerald);
     objectPanel.add(arrowImg);
-    objectPanel.add(rubyNum);
-    objectPanel.add(diamondNum);
-    objectPanel.add(emeraldNum);
-    objectPanel.add(arrowNum);
+    objectPanel.add(rubyLabel);
+    objectPanel.add(diaLabel);
+    objectPanel.add(sapphireLabel);
+    objectPanel.add(arrowLabel);
 
     JPanel promptPanel = new JPanel();
     promptPanel.setLayout(new GridLayout(4, 1));
@@ -79,5 +84,12 @@ class MessagePanel extends JPanel {
     this.add(objectPanel);
     this.add(promptPanel);
     this.setSize(400, 150);
+  }
+
+  public void updateNums(int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
+    diaLabel.setText(String.format("%s", diamondNum));
+    rubyLabel.setText(String.format("%s", rubyNum));
+    sapphireLabel.setText(String.format("%s", sapphireNum));
+    arrowLabel.setText(String.format("%s", arrowNum));
   }
 }

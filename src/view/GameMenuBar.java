@@ -18,6 +18,7 @@ class GameMenuBar extends JMenuBar {
     custom.add(customSetting);
 
     GameSettingFrame settingFrame = new GameSettingFrame();
+
     customSetting.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
