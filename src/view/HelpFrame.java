@@ -11,7 +11,7 @@ class HelpFrame extends JFrame {
     JPanel descriptionPanel = new JPanel();
     descriptionPanel.setLayout(new GridLayout(10, 2));
 
-    JLabel shootKey = new JLabel("S");
+    JLabel shootKey = new JLabel("X");
     JLabel shootKeyInfo = new JLabel("shoot");
 
     JLabel wshootKey = new JLabel("W");

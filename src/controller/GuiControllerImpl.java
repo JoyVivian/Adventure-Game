@@ -59,7 +59,7 @@ public class GuiControllerImpl implements GuiController {
   //https://www.youtube.com/watch?v=GAn5evoACsM
   @Override
   public void handleKeyPress(int keyCode) {
-    Direction direction;
+    Direction direction = null;
     List<Direction> dirs = this.model.getNextDirList();
 
     switch (keyCode) {
@@ -76,8 +76,23 @@ public class GuiControllerImpl implements GuiController {
         direction = Direction.East;
         break;
       case KeyEvent.VK_P:
-        //TODO: show up pick up frame.
         this.showUpPick(this);
+        break;
+      case KeyEvent.VK_W:
+        this.tryShoot(Direction.North);
+        break;
+      case KeyEvent.VK_S:
+        this.tryShoot(Direction.South);
+        break;
+      case KeyEvent.VK_A:
+        this.tryShoot(Direction.West);
+        break;
+      case KeyEvent.VK_D:
+        this.tryShoot(Direction.East);
+        break;
+      case KeyEvent.VK_Q:
+        this.view.disableShoot();
+        break;
       default:
         direction = null;
     }
@@ -86,6 +101,13 @@ public class GuiControllerImpl implements GuiController {
       this.changImg(false);
       this.model.move(direction);
       this.changImg(true);
+    }
+  }
+
+  private void tryShoot(Direction direction) {
+    List<Direction> dirs = this.model.getNextDirList();
+    if (dirs.contains(direction)) {
+      this.view.enableShoot(direction);
     }
   }
 
@@ -110,13 +132,19 @@ public class GuiControllerImpl implements GuiController {
     //Change the pic of the current location.
     this.changImg(true);
 
-    //TODO: change the number of the message board.
     int diaNum = this.model.getPlayerTreasureNum(Treasure.DIAMOND);
     int rubyNum = this.model.getPlayerTreasureNum(Treasure.RUBIE);
     int sapphireNum = this.model.getPlayerTreasureNum(Treasure.SAPPHIRE);
     int arrowNum = this.model.getPlayArrowNum();
 
     this.view.updateMessageBoard(diaNum, rubyNum, sapphireNum, arrowNum);
+  }
+
+  @Override
+  public void handleShoot(Direction direction, int distance) {
+    //TODO: handle shoot here.
+    System.out.println(direction.toString());
+    System.out.println(distance);
   }
 
   private void showUpPick(GuiController guiController) {
@@ -158,8 +186,9 @@ public class GuiControllerImpl implements GuiController {
     try {
       File file = new File(imgPath);
       BufferedImage image = ImageIO.read(file);
+      image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
       image = this.addObjects(image, true);
-      View view = new ViewImpl(model, rows, cols, startRow, startCol, image);
+      View view = new ViewImpl(this, model, rows, cols, startRow, startCol, image);
       return view;
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");
@@ -221,7 +250,7 @@ public class GuiControllerImpl implements GuiController {
 
   private BufferedImage addObjects(BufferedImage image, boolean hasPlayer) throws RuntimeException {
     BufferedImage combinedImage = image;
-    int offset = 10;
+    int offset = 35;
     int arrowNum = this.model.getArrowNum();
 
     /**
@@ -272,7 +301,7 @@ public class GuiControllerImpl implements GuiController {
         offset += 10;
         combinedImage = this.overlay(combinedImage, playerImagePath, offset);
       } catch (IOException e) {
-        throw new RuntimeException("Image loada failed.");
+        throw new RuntimeException("Image loads failed.");
       }
     }
 

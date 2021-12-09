@@ -8,15 +8,17 @@ import java.io.IOException;
 import javax.swing.*;
 
 import controller.GuiController;
+import game.Direction;
 import model.GameModel;
 
 public class ViewImpl extends JFrame implements View {
   private GameModel model;
   private GameBoardPanel gameBoardPanel;
 
-  public ViewImpl(GameModel model, int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
+  public ViewImpl(GuiController guiController, GameModel model, int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
     this.model = model;
-    this.gameBoardPanel = new GameBoardPanel(5, 5, startRow, startCol, image);
+    this.gameBoardPanel = new GameBoardPanel(guiController, rows, cols, startRow, startCol, image);
+
     GameMenuBar gameMenuBar = new GameMenuBar();
     this.setSize(500, 700);
     this.getContentPane().add(gameBoardPanel);
@@ -52,7 +54,7 @@ public class ViewImpl extends JFrame implements View {
   }
 
   @Override
-  public void addKeyPressListener(GuiController controller) {
+  public void addKeyPressListener(GuiController controller) throws IllegalArgumentException {
     if (controller == null) {
       throw new IllegalArgumentException("Controller can not be null.");
     }
@@ -69,15 +71,27 @@ public class ViewImpl extends JFrame implements View {
     this.addKeyListener(keyAdapter);
   }
 
+
   @Override
   public void showUpPick(GuiController guiController, int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
     PickUpFrame pickUpFrame = new PickUpFrame(guiController, diamondNum, rubyNum, sapphireNum, arrowNum);
     pickUpFrame.setVisible(true);
   }
 
+
   @Override
   public void updateMessageBoard(int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
     this.gameBoardPanel.getMessagePanel().updateNums(diamondNum, rubyNum, sapphireNum, arrowNum);
+  }
+
+  @Override
+  public void enableShoot(Direction direction) {
+    this.gameBoardPanel.getMessagePanel().enableShoot(direction);
+  }
+
+  @Override
+  public void disableShoot() {
+    this.gameBoardPanel.getMessagePanel().disableShoot();
   }
 
   @Override

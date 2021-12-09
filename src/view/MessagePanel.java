@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,13 +10,26 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import controller.GuiController;
+import game.Direction;
+
 class MessagePanel extends JPanel {
   private JLabel diaLabel;
   private JLabel rubyLabel;
   private JLabel sapphireLabel;
   private JLabel arrowLabel;
 
-  public MessagePanel() {
+  private JLabel shootDir;
+  private JComboBox shootDis;
+  private JButton shootBtn;
+
+  private GuiController guiController;
+
+
+
+  public MessagePanel(GuiController guiController) {
+    this.guiController = guiController;
+
     JPanel objectPanel = new JPanel();
     objectPanel.setLayout(new GridLayout(2, 4));
     JLabel ruby = new JLabel();
@@ -68,17 +83,76 @@ class MessagePanel extends JPanel {
     objectPanel.add(arrowLabel);
 
     JPanel promptPanel = new JPanel();
-    promptPanel.setLayout(new GridLayout(4, 1));
+    promptPanel.setLayout(new BoxLayout(promptPanel, BoxLayout.Y_AXIS));
+
+    JPanel resultPanel = new JPanel();
+    resultPanel.setLayout(new GridLayout(2, 1));
     JLabel shoot = new JLabel("Shoot result: ");
     JLabel shootResult = new JLabel("");
+    resultPanel.add(shoot);
+    resultPanel.add(shootResult);
 
-    JLabel danger = new JLabel("Danger prompt: ");
-    JLabel dangerResult = new JLabel("");
+    JPanel processPanel = new JPanel();
+    processPanel.setLayout(new BoxLayout(processPanel, BoxLayout.X_AXIS));
 
-    promptPanel.add(shoot);
-    promptPanel.add(shootResult);
-    promptPanel.add(danger);
-    promptPanel.add(dangerResult);
+    shootDir = new JLabel("Shoot dir: ");
+    shootDis = new JComboBox<Integer>();
+    shootDis.addItem(1);
+    shootDis.addItem(2);
+    shootDis.addItem(3);
+    shootDis.addItem(4);
+    shootDis.addItem(5);
+
+    shootDis.setEnabled(false);
+    shootBtn = new JButton("Shoot");
+    shootBtn.setEnabled(false);
+
+    //https://stackoverflow.com/questions/8074316/keylistener-not-working-after-clicking-button
+    //Must set the JButton not focusable, Or the key listener of the frame will not work.
+    shootBtn.setFocusable(false);
+
+    MessagePanel thisPanel = this;
+    shootBtn.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String dirStr = shootDir.getText();
+        String dir = dirStr.substring(11, 12);
+
+        Direction direction = null;
+
+        switch (dir) {
+          case "N":
+            direction = Direction.North;
+            break;
+          case "S":
+            direction = Direction.South;
+            break;
+          case "W":
+            direction = Direction.West;
+            break;
+          case "D":
+            direction = Direction.East;
+            break;
+          default:
+            direction = null;
+        }
+
+        int shootDistance = shootDis.getSelectedIndex() + 1;
+
+        if (direction != null) {
+          guiController.handleShoot(direction, shootDistance);
+        }
+
+        thisPanel.disableShoot();
+      }
+    });
+
+    processPanel.add(shootDir);
+    processPanel.add(shootDis);
+    processPanel.add(shootBtn);
+
+    promptPanel.add(resultPanel);
+    promptPanel.add(processPanel);
 
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     this.add(objectPanel);
@@ -91,5 +165,17 @@ class MessagePanel extends JPanel {
     rubyLabel.setText(String.format("%s", rubyNum));
     sapphireLabel.setText(String.format("%s", sapphireNum));
     arrowLabel.setText(String.format("%s", arrowNum));
+  }
+
+  public void enableShoot(Direction direction) {
+    this.shootDir.setText(String.format("Shoot dir: %s", direction.toString()));
+    this.shootDis.setEnabled(true);
+    this.shootBtn.setEnabled(true);
+  }
+
+  public void disableShoot() {
+    this.shootDir.setText("");
+    this.shootDis.setEnabled(false);
+    this.shootBtn.setEnabled(false);
   }
 }
