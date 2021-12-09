@@ -21,5 +21,11 @@ public interface View {
   public void enableShoot(Direction direction);
 
   public void disableShoot();
+
+  public void showShootResult(Boolean isHit);
+
+  public void setRunoutArrowPrompt();
+
+  public void makeUnvisible();
 }
 

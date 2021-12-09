@@ -23,6 +23,8 @@ class MessagePanel extends JPanel {
   private JComboBox shootDis;
   private JButton shootBtn;
 
+  private JLabel shootResult;
+
   private GuiController guiController;
 
 
@@ -88,7 +90,8 @@ class MessagePanel extends JPanel {
     JPanel resultPanel = new JPanel();
     resultPanel.setLayout(new GridLayout(2, 1));
     JLabel shoot = new JLabel("Shoot result: ");
-    JLabel shootResult = new JLabel("");
+    this.shootResult = new JLabel("");
+    this.shootResult.setFocusable(false);
     resultPanel.add(shoot);
     resultPanel.add(shootResult);
 
@@ -130,7 +133,7 @@ class MessagePanel extends JPanel {
           case "W":
             direction = Direction.West;
             break;
-          case "D":
+          case "E":
             direction = Direction.East;
             break;
           default:
@@ -177,5 +180,17 @@ class MessagePanel extends JPanel {
     this.shootDir.setText("");
     this.shootDis.setEnabled(false);
     this.shootBtn.setEnabled(false);
+  }
+
+  public void setShootResult(Boolean isHit) {
+    if (isHit) {
+      shootResult.setText("You heard a great howl in the distance.");
+    } else {
+      shootResult.setText("You shoot the arrow into the darkness.");
+    }
+  }
+
+  public void setRunoutArrowPrompt() {
+    shootResult.setText("You have run out of arrow, Please explore to find more.");
   }
 }

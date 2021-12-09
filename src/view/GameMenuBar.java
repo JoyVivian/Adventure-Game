@@ -5,19 +5,36 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import controller.GuiController;
+import model.GameModel;
+
 class GameMenuBar extends JMenuBar {
-  public GameMenuBar() {
+  public GameMenuBar(GuiController guiController) {
     JMenu game = new JMenu("Game");
     JMenuItem exitGame = new JMenuItem("Exit game");
     JMenuItem restartGame = new JMenuItem("Restart game");
     game.add(exitGame);
     game.add(restartGame);
 
+    exitGame.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.exit(0);
+      }
+    });
+
+    restartGame.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        guiController.restartGame();
+      }
+    });
+
     JMenu custom = new JMenu("Custom");
     JMenuItem customSetting = new JMenuItem("Custom Setting");
     custom.add(customSetting);
 
-    GameSettingFrame settingFrame = new GameSettingFrame();
+    GameSettingFrame settingFrame = new GameSettingFrame(guiController);
 
     customSetting.addActionListener(new ActionListener() {
       @Override

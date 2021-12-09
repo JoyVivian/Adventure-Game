@@ -15,6 +15,8 @@ import game.Direction;
 import game.Otyugh;
 import game.Treasure;
 import model.GameModel;
+import model.GameModelImpl;
+import view.GameResDialog;
 import view.Util;
 import view.View;
 import view.ViewImpl;
@@ -22,6 +24,13 @@ import view.ViewImpl;
 public class GuiControllerImpl implements GuiController {
   private View view;
   private GameModel model;
+
+  private int customRows = 5;
+  private int customCols = 5;
+  private int customInterconnectivity = 0;
+  private boolean customIsWrap = false;
+  private int customTreasurePer = 20;
+  private int customOtyNum = 5;
 
   public GuiControllerImpl(GameModel model) {
     if (model == null) {
@@ -53,6 +62,13 @@ public class GuiControllerImpl implements GuiController {
       this.changImg(false);
       this.model.move(direction);
       this.changImg(true);
+
+      //Decide whether a player is win or be eaten.
+      if (this.model.isEnd() && !this.model.isEaten(true)) {
+        GameResDialog gameResDialog = new GameResDialog(true, this);
+      } else if (this.model.isEaten(true)) {
+        GameResDialog gameResDialog = new GameResDialog(false, this);
+      }
     }
   }
 
@@ -101,12 +117,25 @@ public class GuiControllerImpl implements GuiController {
       this.changImg(false);
       this.model.move(direction);
       this.changImg(true);
+
+      //Decide whether a player is win or be eaten.
+      if (this.model.isEnd() && !this.model.isEaten(true)) {
+        GameResDialog gameResDialog = new GameResDialog(true, this);
+      } else if (this.model.isEaten(true)) {
+        GameResDialog gameResDialog = new GameResDialog(false, this);
+      }
     }
   }
 
   private void tryShoot(Direction direction) {
     List<Direction> dirs = this.model.getNextDirList();
-    if (dirs.contains(direction)) {
+    int arrowNum = this.model.getPlayArrowNum();
+
+    if (arrowNum == 0) {
+      this.view.setRunoutArrowPrompt();
+    }
+
+    if (dirs.contains(direction) && arrowNum > 0) {
       this.view.enableShoot(direction);
     }
   }
@@ -142,9 +171,23 @@ public class GuiControllerImpl implements GuiController {
 
   @Override
   public void handleShoot(Direction direction, int distance) {
-    //TODO: handle shoot here.
-    System.out.println(direction.toString());
-    System.out.println(distance);
+    //Show the shoot result in the message board.
+    Boolean isHit = this.model.slayOty(direction, distance);
+    this.view.showShootResult(isHit);
+
+    //Update the smell in the current Location.
+    this.changImg(true);
+
+    //Change the number of arrows.
+    this.model.decreaseArrows();
+
+    //Update the messageboard after shoot.
+    int diamondNum = this.model.getPlayerTreasureNum(Treasure.DIAMOND);
+    int rubyNum = this.model.getPlayerTreasureNum(Treasure.RUBIE);
+    int sapphireNum = this.model.getPlayerTreasureNum(Treasure.SAPPHIRE);
+    int arrowNum = this.model.getPlayArrowNum();
+
+    this.view.updateMessageBoard(diamondNum, rubyNum, sapphireNum, arrowNum);
   }
 
   private void showUpPick(GuiController guiController) {
@@ -283,15 +326,43 @@ public class GuiControllerImpl implements GuiController {
 
     //Add monster image to the Dungeon image if there exists Otyugh.
     List<Otyugh> otyughList = this.model.getOtyughs();
-    if (otyughList.size() != 0) {
-      for (Otyugh otyugh : otyughList) {
-        String otyughImgPath = String.format("res/images/otyugh.png");
-        try {
-          offset += 10;
-          combinedImage = this.overlay(combinedImage, otyughImgPath, offset);
-        } catch (IOException e) {
-          throw new RuntimeException("Image loads failed.");
-        }
+    int otyughNum = 0;
+
+    for (Otyugh otyugh : otyughList) {
+      if (otyugh.getHealth() == 0) {
+        continue;
+      } else {
+        otyughNum++;
+      }
+    }
+
+    for (int i = otyughNum; i > 0; i--) {
+      String otyughImgPath = String.format("res/images/otyugh.png");
+      try {
+        offset += 10;
+        combinedImage = this.overlay(combinedImage, otyughImgPath, offset);
+      } catch (IOException e) {
+        throw new RuntimeException("Image loads failed.");
+      }
+    }
+
+    //Add a smell image to the dungeon image if it has smell.
+    String dangerType = this.model.getDangerType();
+    if (dangerType.equals("You smell something horrible here.\n") && hasPlayer) {
+      String stenchLess = String.format("res/images/stench01.png");
+      offset += 10;
+      try {
+        combinedImage = this.overlay(combinedImage, stenchLess, offset);
+      } catch (IOException e) {
+        throw new RuntimeException("Image loads failed.");
+      }
+    } else if (dangerType.equals("You smell something very horrible here.\n") && hasPlayer) {
+      String stenchMore = String.format("res/images/stench02.png");
+      offset += 10;
+      try {
+        combinedImage = this.overlay(combinedImage, stenchMore, offset);
+      } catch (IOException e) {
+        throw new RuntimeException("Image loads failed.");
       }
     }
 
@@ -305,25 +376,6 @@ public class GuiControllerImpl implements GuiController {
       }
     }
 
-    //Add a smell image to the dungeon image if it has smell.
-    String dangerType = this.model.getDangerType();
-    if (dangerType.equals("You smell something horrible here.\n")) {
-      String stenchLess = String.format("res/images/stench01.png");
-      offset += 10;
-      try {
-        combinedImage = this.overlay(combinedImage, stenchLess, offset);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    } else if (dangerType.equals("You smell something very horrible here.\n")) {
-      String stenchMore = String.format("res/images/stench02.png");
-      offset += 10;
-      try {
-        combinedImage = this.overlay(combinedImage, stenchMore, offset);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
     return combinedImage;
   }
 
@@ -388,6 +440,21 @@ public class GuiControllerImpl implements GuiController {
   }
 
   public void restartGame() {
+    GameModel model = new GameModelImpl(customRows, customCols,
+            customInterconnectivity, customIsWrap, customTreasurePer, customOtyNum, true);
+    this.view.makeUnvisible();
+    this.model = model;
+    this.view = this.getInitialView(model);
+    this.playGame(model);
+  }
 
+  @Override
+  public void setCustomValues(int customRows, int customCols, int customInterconnectivity, boolean customIsWrap, int customTreasurePer, int customOtyNum) {
+    this.customRows = customRows;
+    this.customCols = customCols;
+    this.customInterconnectivity = customInterconnectivity;
+    this.customIsWrap = customIsWrap;
+    this.customTreasurePer = customTreasurePer;
+    this.customOtyNum = customOtyNum;
   }
 }

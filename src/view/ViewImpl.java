@@ -19,7 +19,7 @@ public class ViewImpl extends JFrame implements View {
     this.model = model;
     this.gameBoardPanel = new GameBoardPanel(guiController, rows, cols, startRow, startCol, image);
 
-    GameMenuBar gameMenuBar = new GameMenuBar();
+    GameMenuBar gameMenuBar = new GameMenuBar(guiController);
     this.setSize(500, 700);
     this.getContentPane().add(gameBoardPanel);
     this.setJMenuBar(gameMenuBar);
@@ -92,6 +92,21 @@ public class ViewImpl extends JFrame implements View {
   @Override
   public void disableShoot() {
     this.gameBoardPanel.getMessagePanel().disableShoot();
+  }
+
+  @Override
+  public void showShootResult(Boolean isHit) {
+    this.gameBoardPanel.getMessagePanel().setShootResult(isHit);
+  }
+
+  @Override
+  public void setRunoutArrowPrompt() {
+    this.gameBoardPanel.getMessagePanel().setRunoutArrowPrompt();
+  }
+
+  @Override
+  public void makeUnvisible() {
+    this.setVisible(false);
   }
 
   @Override

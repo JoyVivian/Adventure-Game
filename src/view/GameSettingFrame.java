@@ -1,11 +1,15 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import controller.GuiController;
+
 class GameSettingFrame extends JFrame {
-  public GameSettingFrame() {
+  public GameSettingFrame(GuiController guiController) {
     this.setLayout(new GridLayout(7, 2));
     JLabel rowNum = new JLabel("number of rows");
     SpinnerModel rowSpinnerModel = new SpinnerNumberModel(5, 5, 999, 1);
@@ -35,6 +39,33 @@ class GameSettingFrame extends JFrame {
 
     JButton applyBtn = new JButton("apply");
     JButton cancelBtn = new JButton("cancel");
+
+    JFrame thisFrame = this;
+    applyBtn.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        //TODO: TO apply custom setting.
+        int rows = (int) rowSpinner.getValue();
+        int cols = (int) colSpinner.getValue();
+        int interconnectivity = (int) connectivitySpinner.getValue();
+        boolean isWrap = wrapChkBox.isSelected();
+        int per = (int) perSpinner.getValue();
+        int monsterNum = (int) monsterNumSpinner.getValue();
+
+        guiController.setCustomValues(rows, cols, interconnectivity, isWrap, per, monsterNum);
+        guiController.restartGame();
+
+        thisFrame.setVisible(false);
+      }
+    });
+
+
+    cancelBtn.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        thisFrame.setVisible(false);
+      }
+    });
 
     this.add(rowNum);
     this.add(rowSpinner);
