@@ -25,13 +25,7 @@ class MessagePanel extends JPanel {
 
   private JLabel shootResult;
 
-  private GuiController guiController;
-
-
-
   public MessagePanel(GuiController guiController) {
-    this.guiController = guiController;
-
     JPanel objectPanel = new JPanel();
     objectPanel.setLayout(new GridLayout(2, 4));
     JLabel ruby = new JLabel();
@@ -91,7 +85,6 @@ class MessagePanel extends JPanel {
     resultPanel.setLayout(new GridLayout(2, 1));
     JLabel shoot = new JLabel("Shoot result: ");
     this.shootResult = new JLabel("");
-    this.shootResult.setFocusable(false);
     resultPanel.add(shoot);
     resultPanel.add(shootResult);
 
@@ -105,6 +98,8 @@ class MessagePanel extends JPanel {
     shootDis.addItem(3);
     shootDis.addItem(4);
     shootDis.addItem(5);
+
+    shootDis.setFocusable(false);
 
     shootDis.setEnabled(false);
     shootBtn = new JButton("Shoot");
@@ -144,6 +139,7 @@ class MessagePanel extends JPanel {
 
         if (direction != null) {
           guiController.handleShoot(direction, shootDistance);
+          guiController.enableMove();
         }
 
         thisPanel.disableShoot();
@@ -163,26 +159,26 @@ class MessagePanel extends JPanel {
     this.setSize(400, 150);
   }
 
-  public void updateNums(int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
+  void updateNums(int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
     diaLabel.setText(String.format("%s", diamondNum));
     rubyLabel.setText(String.format("%s", rubyNum));
     sapphireLabel.setText(String.format("%s", sapphireNum));
     arrowLabel.setText(String.format("%s", arrowNum));
   }
 
-  public void enableShoot(Direction direction) {
+  void enableShoot(Direction direction) {
     this.shootDir.setText(String.format("Shoot dir: %s", direction.toString()));
     this.shootDis.setEnabled(true);
     this.shootBtn.setEnabled(true);
   }
 
-  public void disableShoot() {
+  void disableShoot() {
     this.shootDir.setText("");
     this.shootDis.setEnabled(false);
     this.shootBtn.setEnabled(false);
   }
 
-  public void setShootResult(Boolean isHit) {
+  void setShootResult(Boolean isHit) {
     if (isHit) {
       shootResult.setText("You heard a great howl in the distance.");
     } else {
@@ -190,7 +186,7 @@ class MessagePanel extends JPanel {
     }
   }
 
-  public void setRunoutArrowPrompt() {
+  void setRunoutArrowPrompt() {
     shootResult.setText("You have run out of arrow, Please explore to find more.");
   }
 }

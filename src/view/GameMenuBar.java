@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import controller.GuiController;
-import model.GameModel;
 
 class GameMenuBar extends JMenuBar {
   public GameMenuBar(GuiController guiController) {

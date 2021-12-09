@@ -32,6 +32,8 @@ public class GuiControllerImpl implements GuiController {
   private int customTreasurePer = 20;
   private int customOtyNum = 5;
 
+  private boolean canmove = true;
+
   public GuiControllerImpl(GameModel model) {
     if (model == null) {
       throw new IllegalArgumentException("Model cannot be null.");
@@ -58,7 +60,8 @@ public class GuiControllerImpl implements GuiController {
     Direction direction = this.calDir(x, y);
     List<Direction> dirs = this.model.getNextDirList();
 
-    if (direction != null && dirs.contains(direction)) {
+
+    if (direction != null && dirs.contains(direction) && canmove) {
       this.changImg(false);
       this.model.move(direction);
       this.changImg(true);
@@ -94,26 +97,39 @@ public class GuiControllerImpl implements GuiController {
       case KeyEvent.VK_P:
         this.showUpPick(this);
         break;
+      case KeyEvent.VK_X:
+        this.disableMove();
       case KeyEvent.VK_W:
-        this.tryShoot(Direction.North);
+        if (!this.canmove) {
+          this.tryShoot(Direction.North);
+        }
         break;
       case KeyEvent.VK_S:
-        this.tryShoot(Direction.South);
+        if (!this.canmove) {
+          this.tryShoot(Direction.South);
+        }
         break;
       case KeyEvent.VK_A:
-        this.tryShoot(Direction.West);
+        if (!this.canmove) {
+          this.tryShoot(Direction.West);
+        }
         break;
       case KeyEvent.VK_D:
-        this.tryShoot(Direction.East);
+        if (!this.canmove) {
+          this.tryShoot(Direction.East);
+        }
         break;
       case KeyEvent.VK_Q:
-        this.view.disableShoot();
+        if (!this.canmove) {
+          this.view.disableShoot();
+        }
+        this.enableMove();
         break;
       default:
         direction = null;
     }
 
-    if (direction != null && dirs.contains(direction)) {
+    if (direction != null && dirs.contains(direction) && canmove) {
       this.changImg(false);
       this.model.move(direction);
       this.changImg(true);
@@ -125,6 +141,16 @@ public class GuiControllerImpl implements GuiController {
         GameResDialog gameResDialog = new GameResDialog(false, this);
       }
     }
+  }
+
+  @Override
+  public void disableMove() {
+    this.canmove = false;
+  }
+
+  @Override
+  public void enableMove() {
+    this.canmove = true;
   }
 
   private void tryShoot(Direction direction) {
@@ -281,7 +307,7 @@ public class GuiControllerImpl implements GuiController {
   private BufferedImage overlay(BufferedImage starting, String fpath, int offset) throws IOException {
     BufferedImage overlay = ImageIO.read(new File(fpath));
     //resize the overlay image to specific size.
-    overlay = Util.resizeImage(overlay, Util.OBJECTIMGSIZE, Util.OBJECTIMGSIZE);
+    //overlay = Util.resizeImage(overlay, Util.OBJECTIMGSIZE, Util.OBJECTIMGSIZE);
     int w = Math.max(starting.getWidth(), overlay.getWidth());
     int h = Math.max(starting.getHeight(), overlay.getHeight());
     BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);

@@ -12,7 +12,8 @@ class DungeonPane extends JScrollPane {
   public DungeonPane(int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
     this.setPreferredSize(new Dimension(500, 400));
     imgPanel = new ImagePanel(rows, cols, startRow, startCol, image);
-    this.setViewportView(imgPanel);
+    ImageWrapperPanel imageWrapperPanel = new ImageWrapperPanel(imgPanel);
+    this.setViewportView(imageWrapperPanel);
   }
 
   ImagePanel getImgPanel() {

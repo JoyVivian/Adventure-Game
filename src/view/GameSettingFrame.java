@@ -44,7 +44,6 @@ class GameSettingFrame extends JFrame {
     applyBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        //TODO: TO apply custom setting.
         int rows = (int) rowSpinner.getValue();
         int cols = (int) colSpinner.getValue();
         int interconnectivity = (int) connectivitySpinner.getValue();

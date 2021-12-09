@@ -11,10 +11,9 @@ public class GameResDialog extends JDialog {
   public GameResDialog(Boolean isWin, GuiController guiController) {
     JLabel gameResult = new JLabel("");
     if (isWin) {
-      gameResult.setText("Congratulations! You win.\nYou can restart the game.");
+      gameResult.setText("Congratulations! You win.");
     } else {
-      gameResult.setText("Chomp, chomp, chomp you have eaten by the monster.\n" +
-              "Please restart the game and try again.");
+      gameResult.setText("Chomp, chomp, chomp you have eaten by the monster.");
     }
 
     JButton okBtn = new JButton("Ok");
@@ -29,7 +28,7 @@ public class GameResDialog extends JDialog {
     this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
     this.add(gameResult);
     this.add(okBtn);
-    this.setSize(400, 400);
+    this.setSize(200, 80);
     this.setVisible(true);
 
   }

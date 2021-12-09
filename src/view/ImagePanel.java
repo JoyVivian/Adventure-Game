@@ -47,7 +47,7 @@ class ImagePanel extends JPanel {
     return this.rows * Util.IMGSIZE;
   }
 
-  public void setImg(BufferedImage image, int row, int col) {
+  void setImg(BufferedImage image, int row, int col) {
     imageLabels[row][col].setIcon(new ImageIcon(image));
   }
 }

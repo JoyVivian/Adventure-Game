@@ -4,8 +4,6 @@ import controller.GuiController;
 import controller.GuiControllerImpl;
 import model.GameModel;
 import model.GameModelImpl;
-import view.View;
-import view.ViewImpl;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

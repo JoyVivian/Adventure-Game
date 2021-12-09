@@ -19,4 +19,8 @@ public interface GuiController {
 
   public void setCustomValues(int customRows, int customCols,
                               int customInterconnectivity, boolean customIsWrap, int customTreasurePer, int customOtyNum);
+
+  void disableMove();
+
+  void enableMove();
 }

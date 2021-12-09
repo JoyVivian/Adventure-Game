@@ -21,11 +21,11 @@ class GameBoardPanel extends JPanel {
     this.add(messagePanel);
   }
 
-  public DungeonPane getDungeonPane() {
+  DungeonPane getDungeonPane() {
     return this.dungeonPane;
   }
 
-  public MessagePanel getMessagePanel() {
+  MessagePanel getMessagePanel() {
     return this.messagePanel;
   }
 }
