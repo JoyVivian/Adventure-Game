@@ -1,6 +1,6 @@
 package view;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  * This class is used to wrap the ImagePanel to ensure that there

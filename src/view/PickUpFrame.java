@@ -1,20 +1,28 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
 
 import controller.GuiController;
 
-public class PickUpFrame extends JFrame {
-  public PickUpFrame(GuiController guiController, int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
+class PickUpFrame extends JFrame {
+  public PickUpFrame(GuiController guiController, int diamondNum,
+                     int rubyNum, int sapphireNum, int arrowNum) {
     this.setLayout(new GridLayout(6, 3));
 
     JLabel name = new JLabel("Name");
     JLabel number = new JLabel("Number");
     JLabel whetherPick = new JLabel("Pick or not");
+
+    this.add(name);
+    this.add(number);
+    this.add(whetherPick);
 
     JLabel diamond = new JLabel("Diamond");
     JLabel diamondNumber = new JLabel(String.format("%s", diamondNum));
@@ -25,6 +33,10 @@ public class PickUpFrame extends JFrame {
       diaCheck.setEnabled(false);
     }
 
+    this.add(diamond);
+    this.add(diamondNumber);
+    this.add(diaCheck);
+
     JLabel ruby = new JLabel("Ruby");
     JLabel rubyNumber = new JLabel(String.format("%s", rubyNum));
     JCheckBox rubyCheck = new JCheckBox();
@@ -33,6 +45,10 @@ public class PickUpFrame extends JFrame {
     } else {
       rubyCheck.setEnabled(false);
     }
+
+    this.add(ruby);
+    this.add(rubyNumber);
+    this.add(rubyCheck);
 
     JLabel sapphire = new JLabel("Sapphire");
     JLabel sapphireNumber = new JLabel(String.format("%s", sapphireNum));
@@ -43,6 +59,10 @@ public class PickUpFrame extends JFrame {
       sapphireCheck.setEnabled(false);
     }
 
+    this.add(sapphire);
+    this.add(sapphireNumber);
+    this.add(sapphireCheck);
+
     JLabel arrow = new JLabel("Arrow");
     JLabel arrowNumber = new JLabel(String.format("%s", arrowNum));
     JCheckBox arrowCheck = new JCheckBox();
@@ -51,6 +71,10 @@ public class PickUpFrame extends JFrame {
     } else {
       arrowCheck.setEnabled(false);
     }
+
+    this.add(arrow);
+    this.add(arrowNumber);
+    this.add(arrowCheck);
 
     JButton okBtn = new JButton("Ok");
     JButton cancelBtn = new JButton("Cancel");
@@ -77,25 +101,7 @@ public class PickUpFrame extends JFrame {
       }
     });
 
-    this.add(name);
-    this.add(number);
-    this.add(whetherPick);
 
-    this.add(diamond);
-    this.add(diamondNumber);
-    this.add(diaCheck);
-
-    this.add(ruby);
-    this.add(rubyNumber);
-    this.add(rubyCheck);
-
-    this.add(sapphire);
-    this.add(sapphireNumber);
-    this.add(sapphireCheck);
-
-    this.add(arrow);
-    this.add(arrowNumber);
-    this.add(arrowCheck);
 
     this.add(okBtn);
     this.add(cancelBtn);

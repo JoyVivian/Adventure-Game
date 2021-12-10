@@ -1,10 +1,16 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SpinnerModel;
+import javax.swing.JSpinner;
+import javax.swing.JCheckBox;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JButton;
 
 import controller.GuiController;
 
@@ -40,6 +46,27 @@ class GameSettingFrame extends JFrame {
     JButton applyBtn = new JButton("apply");
     JButton cancelBtn = new JButton("cancel");
 
+    this.add(connectivity);
+    this.add(connectivitySpinner);
+
+    this.add(rowNum);
+    this.add(rowSpinner);
+
+    this.add(colNum);
+    this.add(colSpinner);
+
+    this.add(percentage);
+    this.add(perSpinner);
+
+    this.add(monsterNum);
+    this.add(monsterNumSpinner);
+
+    this.add(isWrap);
+    this.add(wrapChkBox);
+
+    this.add(applyBtn);
+    this.add(cancelBtn);
+
     JFrame thisFrame = this;
     applyBtn.addActionListener(new ActionListener() {
       @Override
@@ -66,27 +93,6 @@ class GameSettingFrame extends JFrame {
       }
     });
 
-    this.add(rowNum);
-    this.add(rowSpinner);
-
-    this.add(colNum);
-    this.add(colSpinner);
-
-    this.add(connectivity);
-    this.add(connectivitySpinner);
-
-    this.add(percentage);
-    this.add(perSpinner);
-
-    this.add(monsterNum);
-    this.add(monsterNumSpinner);
-
-    this.add(isWrap);
-    this.add(wrapChkBox);
-
-    this.add(applyBtn);
-    this.add(cancelBtn);
-
-    this.setSize(200, 300);
+    this.setSize(400, 300);
   }
 }

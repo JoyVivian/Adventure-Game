@@ -1,15 +1,19 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 
 class HelpFrame extends JFrame {
   public HelpFrame() {
     this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
     JPanel descriptionPanel = new JPanel();
-    descriptionPanel.setLayout(new GridLayout(10, 2));
+    descriptionPanel.setLayout(new GridLayout(11, 2));
 
     JLabel shootKey = new JLabel("X");
     JLabel shootKeyInfo = new JLabel("shoot");
@@ -41,6 +45,9 @@ class HelpFrame extends JFrame {
     JLabel westKey = new JLabel("West");
     JLabel westKeyInfo = new JLabel("Move direction west");
 
+    JLabel quitShootKey = new JLabel("Q");
+    JLabel quitShootKeyInfo = new JLabel("Quit shoot");
+
     descriptionPanel.add(shootKey);
     descriptionPanel.add(shootKeyInfo);
 
@@ -70,6 +77,9 @@ class HelpFrame extends JFrame {
 
     descriptionPanel.add(westKey);
     descriptionPanel.add(westKeyInfo);
+
+    descriptionPanel.add(quitShootKey);
+    descriptionPanel.add(quitShootKeyInfo);
 
     JButton okBtn = new JButton("Ok");
     HelpFrame helpFrame = this;

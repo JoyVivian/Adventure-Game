@@ -65,9 +65,10 @@ public class DungeonImpl implements Dungeon {
 
     //According to the requirements, the start and end position should have a path greater than 5.
     //If the user entered rows and cols less than 5, it will be refactor to 5.
+
+    this.interconnectivity = connectivity;
     int rowNum = rows >= 5 ? rows : 5;
     this.colNum = cols >= 5 ? cols : 5;
-    this.interconnectivity = connectivity;
     this.isWrap = isWrapping;
     this.graph = new GraphImpl(rowNum, this.colNum);
     int vertexNum = rows * cols;

@@ -5,17 +5,39 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import controller.GuiController;
 import game.Direction;
 import model.GameModel;
 
+/**
+ * This class is an implementation of the View interface that extends
+ * from a JFrame. This class is used to construct the main frame of the
+ * whole game and provide methods to update these components included by
+ * this view.
+ */
 public class ViewImpl extends JFrame implements View {
   private GameModel model;
   private GameBoardPanel gameBoardPanel;
 
-  public ViewImpl(GuiController guiController, GameModel model, int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
+  /**
+   * The constructor of the View class that takes in few parameters to construct
+   * the main frame.
+   *
+   * @param guiController The controller of the game.
+   * @param model The model of the game.
+   * @param rows The number of rows of the dungeon.
+   * @param cols The number of the columns of the dungeon.
+   * @param startRow The row of the start location.
+   * @param startCol The column of the start location.
+   * @param image The image of the start location.
+   * @throws IOException When the image loads failed, it will be called.
+   */
+  public ViewImpl(GuiController guiController, GameModel model,
+                  int rows, int cols, int startRow,
+                  int startCol, BufferedImage image) throws IOException {
     this.model = model;
     this.gameBoardPanel = new GameBoardPanel(guiController, rows, cols, startRow, startCol, image);
 
@@ -73,15 +95,19 @@ public class ViewImpl extends JFrame implements View {
 
 
   @Override
-  public void showUpPick(GuiController guiController, int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
-    PickUpFrame pickUpFrame = new PickUpFrame(guiController, diamondNum, rubyNum, sapphireNum, arrowNum);
+  public void showUpPick(GuiController guiController,
+                         int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
+    PickUpFrame pickUpFrame = new PickUpFrame(guiController, diamondNum,
+            rubyNum, sapphireNum, arrowNum);
     pickUpFrame.setVisible(true);
   }
 
 
   @Override
-  public void updateMessageBoard(int diamondNum, int rubyNum, int sapphireNum, int arrowNum) {
-    this.gameBoardPanel.getMessagePanel().updateNums(diamondNum, rubyNum, sapphireNum, arrowNum);
+  public void updateMessageBoard(int diamondNum,
+                                 int rubyNum, int sapphireNum, int arrowNum) {
+    this.gameBoardPanel.getMessagePanel().updateNums(diamondNum, rubyNum,
+            sapphireNum, arrowNum);
   }
 
   @Override
@@ -107,6 +133,11 @@ public class ViewImpl extends JFrame implements View {
   @Override
   public void makeUnvisible() {
     this.setVisible(false);
+  }
+
+  @Override
+  public void showGameResult(Boolean isWin, GuiController guiController) {
+    GameResDialog gameResDialog = new GameResDialog(isWin, guiController);
   }
 
   @Override

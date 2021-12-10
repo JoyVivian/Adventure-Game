@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,10 +17,15 @@ import game.Treasure;
 import model.GameModel;
 import model.GameModelImpl;
 import view.GameResDialog;
-import view.Util;
+import view.ViewUtil;
 import view.View;
 import view.ViewImpl;
 
+/**
+ * This class the implementation of Guiconstroller interface that
+ * takes in the view and model instance and control the flow of the
+ * game.
+ */
 public class GuiControllerImpl implements GuiController {
   private View view;
   private GameModel model;
@@ -34,6 +39,13 @@ public class GuiControllerImpl implements GuiController {
 
   private boolean canmove = true;
 
+  /**
+   * The constructor of the GuiConntroller.
+   * The view is generate according the custom settings.
+   * There exists a default setting in this controller.
+   *
+   * @param model The model generated for the game.
+   */
   public GuiControllerImpl(GameModel model) {
     if (model == null) {
       throw new IllegalArgumentException("Model cannot be null.");
@@ -99,6 +111,7 @@ public class GuiControllerImpl implements GuiController {
         break;
       case KeyEvent.VK_X:
         this.disableMove();
+        break;
       case KeyEvent.VK_W:
         if (!this.canmove) {
           this.tryShoot(Direction.North);
@@ -136,9 +149,9 @@ public class GuiControllerImpl implements GuiController {
 
       //Decide whether a player is win or be eaten.
       if (this.model.isEnd() && !this.model.isEaten(true)) {
-        GameResDialog gameResDialog = new GameResDialog(true, this);
+        this.view.showGameResult(true, this);
       } else if (this.model.isEaten(true)) {
-        GameResDialog gameResDialog = new GameResDialog(false, this);
+        this.view.showGameResult(false, this);
       }
     }
   }
@@ -232,7 +245,7 @@ public class GuiControllerImpl implements GuiController {
     try {
       File file = new File(imgPath);
       BufferedImage image = ImageIO.read(file);
-      image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
+      image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
       image = this.addObjects(image, hasPlayer);
       this.view.updateLocationImg(image);
     } catch (IOException e) {
@@ -255,7 +268,7 @@ public class GuiControllerImpl implements GuiController {
     try {
       File file = new File(imgPath);
       BufferedImage image = ImageIO.read(file);
-      image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
+      image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
       image = this.addObjects(image, true);
       View view = new ViewImpl(this, model, rows, cols, startRow, startCol, image);
       return view;
@@ -304,7 +317,8 @@ public class GuiControllerImpl implements GuiController {
     return orderedStr;
   }
 
-  private BufferedImage overlay(BufferedImage starting, String fpath, int offset) throws IOException {
+  private BufferedImage overlay(BufferedImage starting, String fpath, int offset)
+          throws IOException {
     BufferedImage overlay = ImageIO.read(new File(fpath));
     //resize the overlay image to specific size.
     //overlay = Util.resizeImage(overlay, Util.OBJECTIMGSIZE, Util.OBJECTIMGSIZE);
@@ -322,10 +336,10 @@ public class GuiControllerImpl implements GuiController {
     int offset = 35;
     int arrowNum = this.model.getArrowNum();
 
-    /**
-     * Only add one image to the dungeon image because the number of each object
-     * will show up in a frame when the player try to pick up something.
-     */
+
+    //Only add one image to the dungeon image because the number of each object
+    //will show up in a frame when the player try to pick up something.
+
     //Add arrow image to the dungeon image if there exists arrow.
     if (arrowNum > 0) {
       String arrowImgPath = "res/images/arrow-white.png";
@@ -340,7 +354,8 @@ public class GuiControllerImpl implements GuiController {
     List<Treasure> treasureList = this.model.getTreasureList();
     if (treasureList.size() != 0) {
       for (Treasure treasure : treasureList) {
-        String treasureImgPath = String.format("res/images/%s.png", treasure.toString().toLowerCase());
+        String treasureImgPath = String.format("res/images/%s.png",
+                treasure.toString().toLowerCase());
         try {
           offset += 10;
           combinedImage = this.overlay(combinedImage, treasureImgPath, offset);
@@ -418,20 +433,20 @@ public class GuiControllerImpl implements GuiController {
     rowCol[0] = 0;
     rowCol[1] = 0;
 
-    int imgPanelWidth = this.model.getColNum() * Util.IMGSIZE;
-    int imgPanelHeight = this.model.getRowNum() * Util.IMGSIZE;
+    int imgPanelWidth = this.model.getColNum() * ViewUtil.IMGSIZE;
+    int imgPanelHeight = this.model.getRowNum() * ViewUtil.IMGSIZE;
 
     if (x <= imgPanelWidth && y <= imgPanelHeight) {
-      if (y % Util.IMGSIZE == 0) {
-        rowCol[0] = y / Util.IMGSIZE;
+      if (y % ViewUtil.IMGSIZE == 0) {
+        rowCol[0] = y / ViewUtil.IMGSIZE;
       } else {
-        rowCol[0] = y / Util.IMGSIZE + 1;
+        rowCol[0] = y / ViewUtil.IMGSIZE + 1;
       }
 
-      if (x % Util.IMGSIZE == 0) {
-        rowCol[1] = x / Util.IMGSIZE;
+      if (x % ViewUtil.IMGSIZE == 0) {
+        rowCol[1] = x / ViewUtil.IMGSIZE;
       } else {
-        rowCol[1] = x / Util.IMGSIZE + 1;
+        rowCol[1] = x / ViewUtil.IMGSIZE + 1;
       }
     }
 
@@ -465,6 +480,7 @@ public class GuiControllerImpl implements GuiController {
     return direction;
   }
 
+  @Override
   public void restartGame() {
     GameModel model = new GameModelImpl(customRows, customCols,
             customInterconnectivity, customIsWrap, customTreasurePer, customOtyNum, true);
@@ -475,7 +491,8 @@ public class GuiControllerImpl implements GuiController {
   }
 
   @Override
-  public void setCustomValues(int customRows, int customCols, int customInterconnectivity, boolean customIsWrap, int customTreasurePer, int customOtyNum) {
+  public void setCustomValues(int customRows, int customCols, int customInterconnectivity,
+                              boolean customIsWrap, int customTreasurePer, int customOtyNum) {
     this.customRows = customRows;
     this.customCols = customCols;
     this.customInterconnectivity = customInterconnectivity;

@@ -116,12 +116,11 @@ Controller controller = new ControllerImpl(reader, out);
 
 The Driver class is composed of the concrete class of the GameModel interface and the concrete class
 of Controller interface. 
-- The `res/wins.txt` shows a player explore in a Dungeon and finlly win. Here is 
-a picture showing how a player explore in this run, the blue arrow represents the path that the player follows:
-![img_3.png](img_3.png)
-- The `res\lose.txt` shows a player explore in the Dungeon and finally 
-lose the match. Here is the picture showing it:
-![img_4.png](img_4.png)
+- The `res/wins.txt` shows a player explore in a Dungeon and finlly win. 
+
+- The `res/lose.txt` shows a player explore in the Dungeon and finally 
+lose the match. 
+
 
 
 ## 6.Design changes

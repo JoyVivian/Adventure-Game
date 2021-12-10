@@ -1,17 +1,19 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 class ImagePanel extends JPanel {
   private final int rows;
   private final int cols;
   private SingleImageLabel[][] imageLabels;
 
-  public ImagePanel(int rows, int cols, int startRow, int startCol, BufferedImage image) throws IOException {
+  public ImagePanel(int rows, int cols,
+                    int startRow, int startCol, BufferedImage image) throws IOException {
     this.rows = rows;
     this.cols = cols;
 
@@ -40,11 +42,11 @@ class ImagePanel extends JPanel {
   }
 
   private int calPanelWid() {
-    return this.cols * Util.IMGSIZE;
+    return this.cols * ViewUtil.IMGSIZE;
   }
 
   private int calPanelHei() {
-    return this.rows * Util.IMGSIZE;
+    return this.rows * ViewUtil.IMGSIZE;
   }
 
   void setImg(BufferedImage image, int row, int col) {

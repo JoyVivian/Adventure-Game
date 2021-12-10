@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 
 import controller.GuiController;
 import game.Direction;

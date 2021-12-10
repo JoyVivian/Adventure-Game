@@ -5,24 +5,25 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 class SingleImageLabel extends JLabel {
   public SingleImageLabel() throws RuntimeException {
-   try {
-     File file = new File("res/images/blank.png");
-     BufferedImage image = ImageIO.read(file);
-     image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
-     this.setSize(Util.IMGSIZE, Util.IMGSIZE);
-     this.setIcon(new ImageIcon(image));
-   } catch (IOException e) {
-     throw new RuntimeException("Image loads failed.");
-   }
+    try {
+      File file = new File("res/images/blank.png");
+      BufferedImage image = ImageIO.read(file);
+      image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
+      this.setSize(ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
+      this.setIcon(new ImageIcon(image));
+    } catch (IOException e) {
+      throw new RuntimeException("Image loads failed.");
+    }
   }
 
   public SingleImageLabel(BufferedImage image) throws RuntimeException, IOException {
-    image = Util.resizeImage(image, Util.IMGSIZE, Util.IMGSIZE);
-    this.setSize(Util.IMGSIZE, Util.IMGSIZE);
+    image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
+    this.setSize(ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
     this.setIcon(new ImageIcon(image));
   }
 }
