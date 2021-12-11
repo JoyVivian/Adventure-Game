@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -35,8 +34,7 @@ class MessagePanel extends JPanel {
     objectPanel.setLayout(new GridLayout(2, 4));
     JLabel ruby = new JLabel();
     try {
-      File file = new File("res/images/rubie.png");
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource("images/rubie.png"));
       ruby.setIcon(new ImageIcon(image));
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");
@@ -44,8 +42,7 @@ class MessagePanel extends JPanel {
 
     JLabel diamond = new JLabel();
     try {
-      File file = new File("res/images/diamond.png");
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource("images/diamond.png"));
       diamond.setIcon(new ImageIcon(image));
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");
@@ -53,8 +50,7 @@ class MessagePanel extends JPanel {
 
     JLabel emerald = new JLabel();
     try {
-      File file = new File("res/images/sapphire.png");
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource("images/sapphire.png"));
       emerald.setIcon(new ImageIcon(image));
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");
@@ -62,8 +58,7 @@ class MessagePanel extends JPanel {
 
     JLabel arrowImg = new JLabel();
     try {
-      File file = new File("res/images/arrow-white.png");
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource("images/arrow-white.png"));
       arrowImg.setIcon(new ImageIcon(image));
     } catch (IOException e) {
       throw new RuntimeException("Image loads failed.");

@@ -17,12 +17,17 @@
   be eaten and lose the match. If he encountered a wounded Otyugh, the player will a 50% chance to
   escape. If the player have reached the end point of the Dungeon and is not eaten by the Otyugh, he
   win the match. Otherwise, he loses it.
+- The game provides a Gui that a user can use a mouse or a keyboard to move in the dungeon. By using 
+a keyboard a user also can shoot otyughs and pick up treasures and arrows.
 
 ![img.png](img.png)
 (1) An example of Dungeon.
 
 ![img_1.png](img_1.png)
 (2) An example of player goes through the Dungeon.
+
+![game_screenshot.png](game_screenshot.png)
+(3) The screen shot of the game.
 
 ## 2. Features
 
@@ -46,15 +51,23 @@
 - A player can use arrows to kill Otyughs.
 - A player will smell a dangerous smell when he is near Otyughs.
 - A player can escape when there is only one unhealthy Otyugh.
+- A player can use a mouse or a keyboard to move in the dungeon.
+- A player can use a keyboard to shoot the Otyughs.
+- A player can use a keyboard to pick up treasures.
+- Treasures in the dungeon will be display on the screen.
+- Treasurea that a player have will be display in the screen as well.
+- The idication of smell will display on the screen.
 
 ![img_2.png](img_2.png)
 An example of wrapping Dungeon.
 
 ## 3. How to Run
 
+- Use text-based game.
+
 (1) Open the CMD on Windows or Terminal on Linux and Mac.
 
-(2) Go to the place you store Project3.jar using cd or dir.
+(2) Go to the place you store Project5.jar(in the res dir by default) using cd or dir.
 
 (3) Type this command and with 6 arguments follow it.
 
@@ -76,9 +89,15 @@ An example of creating a 5 * 5 Dungeon with a connectivity 0 ang border not wrap
 caves will be randomly assigned a treasure and 5 Otyughs will be assigned to the Dungeon: 
 
 ```
-Java -jar Project3.jar 5 5 0 false 20 5
+Java -jar Project5.jar 5 5 0 false 20 5
 ```
 
+- Use GUI-based game
+  (1) follow the step(1) (2) above.
+  (2) Type the command without any arguments.
+```
+Java -jar Project5.jar
+```
 ## 4. How to use
 
 (1) Follow step 3 above.
@@ -112,6 +131,12 @@ can be used like this:
 Readable reader = new InputStreamReader(in);
 Controller controller = new ControllerImpl(reader, out);
 ```
+
+(6) A GuiController interface is used to interact with user via mouse and keyboard. It can be used like this:
+```Java
+GameModel model = new GameModelImpl(5, 5, 0, false, 20, 5, true);
+      GuiController controller = new GuiControllerImpl(model);
+```
 ## 5. Example
 
 The Driver class is composed of the concrete class of the GameModel interface and the concrete class
@@ -121,7 +146,34 @@ of Controller interface.
 - The `res/lose.txt` shows a player explore in the Dungeon and finally 
 lose the match. 
 
+- The `res/UIDesign.pdf` shows the UI of the game.
 
+- A user can set custom parameters of the dungeon. By click
+`Custom -> Custom Setting`
+This is the screenshot of setting dungeon parameters by user.
+![custom_setting](custom_setting.png)
+
+- A user can pick up treasures or arrow using the P key on the keyboard.
+In a dungeon that has treasures or arrows, a player first should press K key,
+then a window will pop up to show what objects and their number in the current location,
+a player can then use a mouse to select which object he wants to pick by clicking the check box.
+This is the screenshoot of pick up.
+![pick_up](pick_up.png)
+
+- A user can restart or exit the game by click `Game -> Restart game/ Exit game`
+  - A user can shoot a otyugh when he detects a smell. To shoot, firstly, player should press `x` on
+  the keyboard to represent that he wants to shoot, when he presses this key, he can move util he press `q` to
+  quit shoot or he finishes shooting. Secondly, he could use `W`, `A`, `S`, `D` to represents the shoot
+  direction. He should provide a valid direction or the shoot function will not activated. After the shoot function is activated 
+  and the  message board shows the direction the player choose, a player then can choose the distance that
+  he wants to shoot in that direction. Then he can press shoot button and the shoot result will be shown on the screen.
+  axa
+
+This is a picture shows that the shoot function is activated.
+![activated_shoot](activated_shoot.png)
+
+This is a picture shows the shoot result.
+![shoot_result](shoot_result.png)
 
 ## 6.Design changes
 
@@ -147,11 +199,20 @@ lose the match.
 (11) Add isWin() method to the IGameModel interface to determine whether a player has win when he move to a new location.
 
 (12) Add isEaten() method to the IGameModel interface to determine whether the player will be eaten by a otyugh in the current location.
+
+(13) Add some functions in the GameModel.
+
+(14) Add a GuiController to control the flow of the GUI-based game.
+
+(15) Add few views to make the game graphics.
+
 ## 7.Limitations
 
 - The model can not count the number of each kinds of treasures.
 - The model can only assigned treasures to caves according to their place instead of choosing the
   place randomly.
+- Pick up function is not that user friendly, may be could use some concise method to replace the frame.
+- Pick up can not choose the number of each item that a player wants to pick.
 
 ## 8. Assumptions
 
@@ -167,3 +228,8 @@ lose the match.
 
 <cite>https://www.sanfoundry.com/java-program-implement-adjacency-list/
 
+(3) How to resize a BufferImage
+<cite>https://www.baeldung.com/java-resize-image</cite>
+
+(4) Remove the gap of the GridLayout
+<cite>https://stackoverflow.com/questions/65112002/too-large-vertical-gaps-on-swing-gridlayout</cite>

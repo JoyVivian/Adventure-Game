@@ -382,7 +382,8 @@ public class DungeonImpl implements Dungeon {
 
   @Override
   public Location getStart() {
-    return this.graph.getLocation(this.start);
+    LocationImpl location = this.graph.getLocation(this.start);
+    return location;
   }
 
   @Override

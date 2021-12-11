@@ -3,7 +3,6 @@ package controller;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -240,11 +239,10 @@ public class GuiControllerImpl implements GuiController {
   }
 
   private void changImg(Boolean hasPlayer) {
-    String imgPath = String.format("res/images/%s.png", this.getImgPath());
+    String imgPath = String.format("images/%s.png", this.getImgPath());
 
     try {
-      File file = new File(imgPath);
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource(imgPath));
       image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
       image = this.addObjects(image, hasPlayer);
       this.view.updateLocationImg(image);
@@ -263,11 +261,10 @@ public class GuiControllerImpl implements GuiController {
     int startRow = model.getStart().getRow();
     int startCol = model.getStart().getCol();
 
-    String imgPath = String.format("res/images/%s.png", this.getImgPath());
+    String imgPath = String.format("images/%s.png", this.getImgPath());
 
     try {
-      File file = new File(imgPath);
-      BufferedImage image = ImageIO.read(file);
+      BufferedImage image = ImageIO.read(ClassLoader.getSystemResource(imgPath));
       image = ViewUtil.resizeImage(image, ViewUtil.IMGSIZE, ViewUtil.IMGSIZE);
       image = this.addObjects(image, true);
       View view = new ViewImpl(this, model, rows, cols, startRow, startCol, image);
@@ -319,7 +316,7 @@ public class GuiControllerImpl implements GuiController {
 
   private BufferedImage overlay(BufferedImage starting, String fpath, int offset)
           throws IOException {
-    BufferedImage overlay = ImageIO.read(new File(fpath));
+    BufferedImage overlay = ImageIO.read(ClassLoader.getSystemResource(fpath));
     //resize the overlay image to specific size.
     //overlay = Util.resizeImage(overlay, Util.OBJECTIMGSIZE, Util.OBJECTIMGSIZE);
     int w = Math.max(starting.getWidth(), overlay.getWidth());
@@ -342,7 +339,7 @@ public class GuiControllerImpl implements GuiController {
 
     //Add arrow image to the dungeon image if there exists arrow.
     if (arrowNum > 0) {
-      String arrowImgPath = "res/images/arrow-white.png";
+      String arrowImgPath = "images/arrow-white.png";
       try {
         combinedImage = this.overlay(image, arrowImgPath, offset);
       } catch (IOException e) {
@@ -354,7 +351,7 @@ public class GuiControllerImpl implements GuiController {
     List<Treasure> treasureList = this.model.getTreasureList();
     if (treasureList.size() != 0) {
       for (Treasure treasure : treasureList) {
-        String treasureImgPath = String.format("res/images/%s.png",
+        String treasureImgPath = String.format("images/%s.png",
                 treasure.toString().toLowerCase());
         try {
           offset += 10;
@@ -378,7 +375,7 @@ public class GuiControllerImpl implements GuiController {
     }
 
     for (int i = otyughNum; i > 0; i--) {
-      String otyughImgPath = String.format("res/images/otyugh.png");
+      String otyughImgPath = String.format("images/otyugh.png");
       try {
         offset += 10;
         combinedImage = this.overlay(combinedImage, otyughImgPath, offset);
@@ -390,7 +387,7 @@ public class GuiControllerImpl implements GuiController {
     //Add a smell image to the dungeon image if it has smell.
     String dangerType = this.model.getDangerType();
     if (dangerType.equals("You smell something horrible here.\n") && hasPlayer) {
-      String stenchLess = String.format("res/images/stench01.png");
+      String stenchLess = String.format("images/stench01.png");
       offset += 10;
       try {
         combinedImage = this.overlay(combinedImage, stenchLess, offset);
@@ -398,7 +395,7 @@ public class GuiControllerImpl implements GuiController {
         throw new RuntimeException("Image loads failed.");
       }
     } else if (dangerType.equals("You smell something very horrible here.\n") && hasPlayer) {
-      String stenchMore = String.format("res/images/stench02.png");
+      String stenchMore = String.format("images/stench02.png");
       offset += 10;
       try {
         combinedImage = this.overlay(combinedImage, stenchMore, offset);
@@ -409,7 +406,7 @@ public class GuiControllerImpl implements GuiController {
 
     if (hasPlayer) {
       try {
-        String playerImagePath = String.format("res/images/player.png");
+        String playerImagePath = String.format("images/player.png");
         offset += 10;
         combinedImage = this.overlay(combinedImage, playerImagePath, offset);
       } catch (IOException e) {
