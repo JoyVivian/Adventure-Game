@@ -23,10 +23,10 @@ a keyboard a user also can shoot otyughs and pick up treasures and arrows.
 ![img.png](res/img.png)
 (1) An example of Dungeon.
 
-![img_1.png](img_1.png)
+![img_1.png](res/img_1.png)
 (2) An example of player goes through the Dungeon.
 
-![game_screenshot.png](game_screenshot.png)
+![game_screenshot.png](res/game_screenshot.png)
 (3) The screen shot of the game.
 
 ## 2. Features
@@ -58,7 +58,7 @@ a keyboard a user also can shoot otyughs and pick up treasures and arrows.
 - Treasurea that a player have will be display in the screen as well.
 - The idication of smell will display on the screen.
 
-![img_2.png](img_2.png)
+![img_2.png](res/img_2.png)
 An example of wrapping Dungeon.
 
 ## 3. How to Run
@@ -151,14 +151,14 @@ lose the match.
 - A user can set custom parameters of the dungeon. By click
 `Custom -> Custom Setting`
 This is the screenshot of setting dungeon parameters by user.
-![custom_setting](custom_setting.png)
+![custom_setting](res/custom_setting.png)
 
 - A user can pick up treasures or arrow using the P key on the keyboard.
 In a dungeon that has treasures or arrows, a player first should press K key,
 then a window will pop up to show what objects and their number in the current location,
 a player can then use a mouse to select which object he wants to pick by clicking the check box.
 This is the screenshoot of pick up.
-![pick_up](pick_up.png)
+![pick_up](res/pick_up.png)
 
 - A user can restart or exit the game by click `Game -> Restart game/ Exit game`
   - A user can shoot a otyugh when he detects a smell. To shoot, firstly, player should press `x` on
@@ -170,10 +170,10 @@ This is the screenshoot of pick up.
   axa
 
 This is a picture shows that the shoot function is activated.
-![activated_shoot](activated_shoot.png)
+![activated_shoot](res/activated_shoot.png)
 
 This is a picture shows the shoot result.
-![shoot_result](shoot_result.png)
+![shoot_result](res/shoot_result.png)
 
 ## 6.Design changes
 
