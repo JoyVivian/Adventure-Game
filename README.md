@@ -72,7 +72,7 @@ An example of wrapping Dungeon.
 (3) Type this command and with 6 arguments follow it.
 
 ```
-Java -jar Project3.jar
+Java -jar Project5.jar
 ```
 
 - arg[0]: The number of rows in the Dungeon, please input an integer that greater than 5.
@@ -106,7 +106,7 @@ Java -jar Project5.jar
 of creating a Dungeon is:
 
 ```Java
-Dungeon dungeon=new DungeonImpl(rowNum,colNum,interconnectivity,isWrap,percentage, otyNum, true);
+Dungeon dungeon = new DungeonImpl(rowNum,colNum,interconnectivity,isWrap,percentage, otyNum, true);
 ```
 
 The last argument means that the instance will not be used for testing. If you use this instance to
@@ -116,7 +116,7 @@ test, you need to input ``false``.
 player is:
 
 ```Java
-Player player=new PlayerImpl();
+Player player = new PlayerImpl();
 ```
 
 (4) A GameModel interface is used to compose functions of Dungeon interface and
