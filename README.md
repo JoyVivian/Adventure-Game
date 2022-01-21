@@ -20,7 +20,7 @@
 - The game provides a Gui that a user can use a mouse or a keyboard to move in the dungeon. By using 
 a keyboard a user also can shoot otyughs and pick up treasures and arrows.
 
-![img.png](img.png)
+![img.png](res/img.png)
 (1) An example of Dungeon.
 
 ![img_1.png](img_1.png)
